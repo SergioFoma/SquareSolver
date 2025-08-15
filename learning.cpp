@@ -118,14 +118,20 @@ int getint( char number[], int sizeNumber ) {
     }
 
     int result = 0;
-    for ( indexNumber = 0; indexNumber < sizeNumber; indexNumber++) result = 10 * result + ( number[ indexNumber ] - '0'); // перевод строки в числовый формат
+    for ( indexNumber = 0; indexNumber < sizeNumber; indexNumber++) {
+        
+        result = 10 * result + ( number[ indexNumber ] - '0'); // перевод строки в числовый формат
+    }
     return result;
 
 }
 int getNumber( char number[], int sizeNumber, int parametr, int sign) {
 
-    while( Size > 0 ) number[ sizeNumber++ ] = pop();
+    while( Size > 0 ) {
+        number[ sizeNumber++ ] = pop();
+    }
     if( sizeNumber != 0 ) return ( getint( number, sizeNumber ) * sign );
     else return ( parametr *= sign );
 
 }
+
