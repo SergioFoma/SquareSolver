@@ -3,23 +3,24 @@
 #include <ctype.h>
 #include <math.h>
 
-#define MAXSIZE 100
+void push(char el, char* myStack, int* Size);
 
-char myStack[ MAXSIZE ]; // Стек
-int Size = 0; // Размера стека
-
-void push(char el);
-
-char pop();
+char pop( char* myStack, int* Size);
 
 int getint( char number[], int sizeNumber);
 
-int getNumber( char number[], int sizeNumber, int parametr, int sign);
+int getNumber( char number[], int sizeNumber, int parametr, int sign, char* myStack, int* Size);
 
 int main( void ) {
 
-    printf("Правило ввода: Если хотите возвести в степень, введите символ '^'\n\nЕсли хотите умножить число на неизвестную  переменную, введите число с учетом знака, а затем переменнную без пробелов\n\n");
-    printf("Пример: 5 умножить на x эквивалетно записи 5x, x возвести в степень 2 эквивалентно записи 2^x\n\n");
+    printf("Правило ввода: Если хотите возвести в степень, введите символ '^'\n\n"
+    "Если хотите умножить число на неизвестную  переменную, введите число с учетом знака, а затем переменнную без пробелов\n\n"
+    "Пример: 5 умножить на x эквивалетно записи 5x, x возвести в степень 2 эквивалентно записи 2^x\n\n");
+
+    const int MAXSIZE = 100; // Максимальная длина строки( константа )
+
+    char myStack[ MAXSIZE ]; // Стек
+    int Size = 0; // Размера стека
 
     char Array[ MAXSIZE ];
 
@@ -41,24 +42,24 @@ int main( void ) {
 
         if ( isdigit( Array[ indexArray ] ) && Array[ indexArray - 1] != '^' ) { // Добавляем все цифры кроме степени икса
 
-            push( Array[ indexArray ] );
+            push( Array[ indexArray ], myStack, &Size );
         }
 
 
         if ( Array[ indexArray-1 ] != 'x' && (Array[ indexArray ] == '+' || Array[ indexArray ] == '-' || ( indexArray == sizeArray - 1 && isdigit(Array[ indexArray ]) ) ) ) { // Подсчет коэффициента c
 
-            c = getNumber( number, sizeNumber, c, sign);
+            c = getNumber( number, sizeNumber, c, sign, myStack, &Size);
 
         }
 
         else if ( Array[ indexArray ] == 'x' && Array[ indexArray + 1 ] == '^') { // Подсчет коэффициента a
 
-            a = getNumber( number, sizeNumber, a, sign);
+            a = getNumber( number, sizeNumber, a, sign, myStack, &Size);
         }
 
         else if( Array[ indexArray ] == 'x') { // Подсчет коэффициента b
 
-            b = getNumber( number, sizeNumber, b, sign );
+            b = getNumber( number, sizeNumber, b, sign, myStack, &Size);
         }
 
         if ( Array[ indexArray ] == '-') {
@@ -102,11 +103,13 @@ int main( void ) {
     return 0;
 }
 
-void push( char el) {
-    myStack[ Size++] = el;
+void push( char el, char* myStack, int* Size) {
+    *( myStack + (*Size) ) = el;
+    (*Size)++;
 }
-char pop() {
-    return myStack[ --Size ];
+char pop( char* myStack, int* Size) {
+    (*Size)--;
+    return *( myStack + (*Size) );
 }
 int getint( char number[], int sizeNumber ) {
 
@@ -119,19 +122,19 @@ int getint( char number[], int sizeNumber ) {
 
     int result = 0;
     for ( indexNumber = 0; indexNumber < sizeNumber; indexNumber++) {
-        
+
         result = 10 * result + ( number[ indexNumber ] - '0'); // перевод строки в числовый формат
     }
     return result;
 
 }
-int getNumber( char number[], int sizeNumber, int parametr, int sign) {
+int getNumber( char number[], int sizeNumber, int parametr, int sign, char* myStack, int* Size) {
 
-    while( Size > 0 ) {
-        number[ sizeNumber++ ] = pop();
+    while( *Size > 0 ) {
+
+        number[ sizeNumber++ ] = pop( myStack, Size );
     }
+
     if( sizeNumber != 0 ) return ( getint( number, sizeNumber ) * sign );
     else return ( parametr *= sign );
-
 }
-
