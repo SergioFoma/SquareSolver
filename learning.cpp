@@ -7,17 +7,17 @@ void push(char el, char* myStack, int* stackSize);
 
 char pop( char* myStack, int* stackSize);
 
-int getint( char number[], int sizeNumber);
+double getint( char number[], int sizeNumber);
 
-int getNumber( char number[], int sizeNumber, int parametr, int numberSign, char* myStack, int* stackSize);
+double getNumber( char number[], int sizeNumber, double parametr, int numberSign, char* myStack, int* stackSize);
 
-int correctInput( char* inputString, int* inputSize);
+int correctInput( char* inputString, int* inputSize, const int* maxArraySize);
 
 int main( void ) {
 
     printf("Правило ввода: Если хотите возвести в степень, введите символ '^'\n\n"
     "Если хотите умножить число на неизвестную  переменную, введите число с учетом знака, а затем переменнную без пробелов\n\n"
-    "Пример: 5 умножить на x эквивалетно записи 5x, x возвести в степень 2 эквивалентно записи 2^x\n\n");
+    "Пример: 5 умножить на x эквивалетно записи 5x, x возвести в степень 2 эквивалентно записи x^2\n\n");
 
     const int maxArraySize = 100; // Максимальная длина строки( константа )
 
@@ -26,37 +26,30 @@ int main( void ) {
 
     char inputString[ maxArraySize ];
 
-    int inputRead = 0, inputSize = 0, inputStringIndex = 0; // переменная для сяитывания, размер строки ввода и далее индекс для этой строки
+    int inputSize = 0; // размер строки ввода
 
-    while ( ( inputRead = getchar() ) != '\n' && inputSize < maxArraySize) {
-
-        inputString[ inputSize++ ] = inputRead;
-
-        if ( inputSize == maxArraySize) {
-            printf("Введенная строка имеет максимально возможною длинну. Больше символов ввести нельзя\n\n");
-        }
-    }
-
-    if ( !correctInput( inputString, &inputSize) ) {
+    if ( !correctInput( inputString, &inputSize, &maxArraySize) ) { // Считывание и проверка на корректноть
         return 0;
     }
 
-    int a = 1, b = 1, c  = 1; // коэффициенты квадратного уравнения ( по умолчанию 1)
+    double a = 1, b = 1, c  = 1; // коэффициенты квадратного уравнения ( по умолчанию 1)
 
     int numberSign = 1; // Знак коэффициентов
 
-    for (; inputStringIndex < inputSize; inputStringIndex++) {
+    for (int inputStringIndex = 0; inputStringIndex < inputSize; inputStringIndex++) {
 
         char number[ maxArraySize ];
         int sizeNumber = 0;
 
-        if ( isdigit( inputString[ inputStringIndex ] ) && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры кроме степени икса
+        if ( (isdigit( inputString[ inputStringIndex ] ) || inputString[ inputStringIndex] == '.') && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры кроме степени икса
 
             push( inputString[ inputStringIndex ], myStack, &stackSize );
         }
 
 
-        if ( inputString[ inputStringIndex-1 ] != 'x' && (inputString[ inputStringIndex ] == '+' || inputString[ inputStringIndex ] == '-' || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ]) ) ) ) { // Подсчет коэффициента c
+        if ( inputString[ inputStringIndex-1 ] != 'x' && (inputString[ inputStringIndex ] == '+'
+        || inputString[ inputStringIndex ] == '-'
+        || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ]) ) ) ) { // Подсчет коэффициента c
 
             c = getNumber( number, sizeNumber, c, numberSign, myStack, &stackSize);
 
@@ -83,7 +76,7 @@ int main( void ) {
         }
     }
 
-    int D = b * b - 4 * a * c;
+    double D = b * b - 4 * a * c;
 
     if ( D < 0) {
 
@@ -102,7 +95,7 @@ int main( void ) {
 
         double x2 = ( - b + sqrt( D ) ) / (2 * a);
 
-        printf("a: %d b: %d c: %d\n", a, b, c);
+        printf("a: %.1f b: %.1f c: %.1f\n", a, b, c);
 
         if ( x1 == x2) {
             printf("Корни совпадают и равны %.1f", x1);
@@ -123,7 +116,7 @@ char pop( char* myStack, int* stackSize) {
     (*stackSize)--;
     return *( myStack + (*stackSize) );
 }
-int getint( char number[], int sizeNumber ) {
+double getint( char number[], int sizeNumber ) {
 
     int indexNumber = 0;
     for ( ; indexNumber < ( sizeNumber / 2); indexNumber++) { // цикл для reverse
@@ -132,15 +125,30 @@ int getint( char number[], int sizeNumber ) {
         number[ sizeNumber - 1 - indexNumber] = tmp;
     }
 
-    int result = 0;
-    for ( indexNumber = 0; indexNumber < sizeNumber; indexNumber++) {
+    double result = 0.0, power = 1.0;
 
-        result = 10 * result + ( number[ indexNumber ] - '0'); // перевод строки в числовый формат
+    for( indexNumber = 0; isdigit( number[ indexNumber ] ); indexNumber++) {
+
+        result = result * 10.0 + ( number[ indexNumber ] - '0' );
+
     }
-    return result;
+
+    if ( number[ indexNumber ] == '.' ) {
+        indexNumber++;
+
+    }
+
+    for( ; isdigit( number[ indexNumber ] ) && indexNumber < sizeNumber; indexNumber++) {
+
+        result = result * 10.0 + ( number[ indexNumber ] - '0' );
+        power *= 10.0;
+    }
+
+
+    return ( result / power );
 
 }
-int getNumber( char number[], int sizeNumber, int parametr, int numberSign, char* myStack, int* stackSize) {
+double getNumber( char number[], int sizeNumber, double parametr, int numberSign, char* myStack, int* stackSize) {
 
     while( *stackSize > 0 ) {
 
@@ -150,7 +158,20 @@ int getNumber( char number[], int sizeNumber, int parametr, int numberSign, char
     if( sizeNumber != 0 ) return ( getint( number, sizeNumber ) * numberSign );
     else return ( parametr *= numberSign );
 }
-int correctInput( char* inputString, int*inputSize) {
+int correctInput( char* inputString, int*inputSize, const int* maxArraySize) {
+
+    int inputRead = 0;
+
+    while ( ( inputRead = getchar() ) != '\n' && *inputSize < *maxArraySize) { // Считывание строки
+
+        inputString[ (*inputSize)++ ] = inputRead;
+
+        if ( *inputSize == *maxArraySize) {
+            printf("Введенная строка имеет максимально возможною длинну. Больше символов ввести нельзя\n\n");
+        }
+    }
+
+    // Проверка на корректность ввода
 
     if ( *inputSize == 0 ) {
 
@@ -158,8 +179,8 @@ int correctInput( char* inputString, int*inputSize) {
         return 0;
     }
 
-    int inputIndex = 0, countX = 0, countXX = 0;
-    for ( ; inputIndex < *inputSize; inputIndex++) {
+    int countX = 0, countXX = 0;
+    for ( int inputIndex = 0 ; inputIndex < *inputSize; inputIndex++) {
 
         if ( *(inputString + inputIndex) == 'x') {
 
@@ -171,9 +192,11 @@ int correctInput( char* inputString, int*inputSize) {
             ++countXX;
         }
 
-        if ( !( isdigit( *(inputString + inputIndex) ) ) && ( *(inputString + inputIndex) != 'x' ) && ( *(inputString + inputIndex) != '+') && (*(inputString + inputIndex) != '-') && (*(inputString + inputIndex) != '^')) {
+        if ( !( isdigit( *(inputString + inputIndex) ) ) && ( *(inputString + inputIndex) != 'x' )
+        && ( *(inputString + inputIndex) != '+') && (*(inputString + inputIndex) != '-')
+        && (*(inputString + inputIndex) != '^') && ( *(inputString + inputIndex) != '.' ) ) {
 
-            printf("\nОшибка. Введен неверный символ: %c.\n", *(inputString + inputIndex) );
+            printf("\nОшибка. Введен неверный символ: %c\n", *(inputString + inputIndex) );
             return 0;
         }
 
@@ -183,9 +206,10 @@ int correctInput( char* inputString, int*inputSize) {
             return 0;
         }
 
-        else if( ( *( inputString + inputIndex ) == '+' || *( inputString + inputIndex ) == '-') && ( *( inputString + inputIndex + 1 ) == '+' || *( inputString + inputIndex + 1) == '-' ) ) {
+        else if( ( *( inputString + inputIndex ) == '+' || *( inputString + inputIndex ) == '-' || *(inputString + inputIndex) == '.')
+        && ( *( inputString + inputIndex + 1 ) == '+' || *( inputString + inputIndex + 1) == '-' || *(inputString + inputIndex + 1) == '.' ) ) {
 
-            printf("\nОшибка. Введен лишний символ %c.\n", *( inputString + inputIndex + 1) );
+            printf("\nОшибка. Введен лишний символ %c\n", *( inputString + inputIndex + 1) );
             return 0;
         }
 
@@ -200,6 +224,7 @@ int correctInput( char* inputString, int*inputSize) {
             printf("\nОшибка. Уравнение не второй степени.");
             return 0;
         }
+
 
     }
     return 1;
