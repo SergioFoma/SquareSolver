@@ -3,13 +3,15 @@
 #include <ctype.h>
 #include <math.h>
 
-void push(char el, char* myStack, int* Size);
+void push(char el, char* myStack, int* stackSize);
 
-char pop( char* myStack, int* Size);
+char pop( char* myStack, int* stackSize);
 
 int getint( char number[], int sizeNumber);
 
-int getNumber( char number[], int sizeNumber, int parametr, int sign, char* myStack, int* Size);
+int getNumber( char number[], int sizeNumber, int parametr, int numberSign, char* myStack, int* stackSize);
+
+int correctInput( char* inputString, int* inputSize);
 
 int main( void ) {
 
@@ -17,57 +19,67 @@ int main( void ) {
     "Если хотите умножить число на неизвестную  переменную, введите число с учетом знака, а затем переменнную без пробелов\n\n"
     "Пример: 5 умножить на x эквивалетно записи 5x, x возвести в степень 2 эквивалентно записи 2^x\n\n");
 
-    const int MAXSIZE = 100; // Максимальная длина строки( константа )
+    const int maxArraySize = 100; // Максимальная длина строки( константа )
 
-    char myStack[ MAXSIZE ]; // Стек
-    int Size = 0; // Размера стека
+    char myStack[ maxArraySize ]; // Стек
+    int stackSize = 0; // Размера стека
 
-    char Array[ MAXSIZE ];
+    char inputString[ maxArraySize ];
 
-    int element = 0, sizeArray = 0, indexArray = 0; // индексы i и j для массива и переменная c для считывания
+    int inputRead = 0, inputSize = 0, inputStringIndex = 0; // переменная для сяитывания, размер строки ввода и далее индекс для этой строки
 
-    while ( ( element = getchar() ) != '\n' && sizeArray < MAXSIZE) {
+    while ( ( inputRead = getchar() ) != '\n' && inputSize < maxArraySize) {
 
-        Array[ sizeArray++ ] = element;
+        inputString[ inputSize++ ] = inputRead;
+
+        if ( inputSize == maxArraySize) {
+            printf("Введенная строка имеет максимально возможною длинну. Больше символов ввести нельзя\n\n");
+        }
+    }
+
+    if ( !correctInput( inputString, &inputSize) ) {
+        return 0;
     }
 
     int a = 1, b = 1, c  = 1; // коэффициенты квадратного уравнения ( по умолчанию 1)
 
-    int sign = 1; // Знак коэффициентов
+    int numberSign = 1; // Знак коэффициентов
 
-    for (; indexArray < sizeArray; indexArray++) {
+    for (; inputStringIndex < inputSize; inputStringIndex++) {
 
-        char number[ MAXSIZE ];
+        char number[ maxArraySize ];
         int sizeNumber = 0;
 
-        if ( isdigit( Array[ indexArray ] ) && Array[ indexArray - 1] != '^' ) { // Добавляем все цифры кроме степени икса
+        if ( isdigit( inputString[ inputStringIndex ] ) && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры кроме степени икса
 
-            push( Array[ indexArray ], myStack, &Size );
+            push( inputString[ inputStringIndex ], myStack, &stackSize );
         }
 
 
-        if ( Array[ indexArray-1 ] != 'x' && (Array[ indexArray ] == '+' || Array[ indexArray ] == '-' || ( indexArray == sizeArray - 1 && isdigit(Array[ indexArray ]) ) ) ) { // Подсчет коэффициента c
+        if ( inputString[ inputStringIndex-1 ] != 'x' && (inputString[ inputStringIndex ] == '+' || inputString[ inputStringIndex ] == '-' || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ]) ) ) ) { // Подсчет коэффициента c
 
-            c = getNumber( number, sizeNumber, c, sign, myStack, &Size);
+            c = getNumber( number, sizeNumber, c, numberSign, myStack, &stackSize);
 
         }
 
-        else if ( Array[ indexArray ] == 'x' && Array[ indexArray + 1 ] == '^') { // Подсчет коэффициента a
+        else if ( inputString[ inputStringIndex ] == 'x' && inputString[ inputStringIndex + 1 ] == '^') { // Подсчет коэффициента a
 
-            a = getNumber( number, sizeNumber, a, sign, myStack, &Size);
+            a = getNumber( number, sizeNumber, a, numberSign, myStack, &stackSize);
         }
 
-        else if( Array[ indexArray ] == 'x') { // Подсчет коэффициента b
+        else if( inputString[ inputStringIndex ] == 'x') { // Подсчет коэффициента b
 
-            b = getNumber( number, sizeNumber, b, sign, myStack, &Size);
+            b = getNumber( number, sizeNumber, b, numberSign, myStack, &stackSize);
         }
 
-        if ( Array[ indexArray ] == '-') {
-            sign = -1;
+        if ( inputString[ inputStringIndex] == '-') {
+
+            numberSign = -1;
         }                                       // меняем знак, если его нашли
 
-        else if ( Array[ indexArray ] == '+') {
-            sign = 1;
+        else if ( inputString[ inputStringIndex ] == '+') {
+
+            numberSign = 1;
         }
     }
 
@@ -103,13 +115,13 @@ int main( void ) {
     return 0;
 }
 
-void push( char el, char* myStack, int* Size) {
-    *( myStack + (*Size) ) = el;
-    (*Size)++;
+void push( char el, char* myStack, int* stackSize) {
+    *( myStack + (*stackSize) ) = el;
+    (*stackSize)++;
 }
-char pop( char* myStack, int* Size) {
-    (*Size)--;
-    return *( myStack + (*Size) );
+char pop( char* myStack, int* stackSize) {
+    (*stackSize)--;
+    return *( myStack + (*stackSize) );
 }
 int getint( char number[], int sizeNumber ) {
 
@@ -128,13 +140,67 @@ int getint( char number[], int sizeNumber ) {
     return result;
 
 }
-int getNumber( char number[], int sizeNumber, int parametr, int sign, char* myStack, int* Size) {
+int getNumber( char number[], int sizeNumber, int parametr, int numberSign, char* myStack, int* stackSize) {
 
-    while( *Size > 0 ) {
+    while( *stackSize > 0 ) {
 
-        number[ sizeNumber++ ] = pop( myStack, Size );
+        number[ sizeNumber++ ] = pop( myStack, stackSize );
     }
 
-    if( sizeNumber != 0 ) return ( getint( number, sizeNumber ) * sign );
-    else return ( parametr *= sign );
+    if( sizeNumber != 0 ) return ( getint( number, sizeNumber ) * numberSign );
+    else return ( parametr *= numberSign );
+}
+int correctInput( char* inputString, int*inputSize) {
+
+    if ( *inputSize == 0 ) {
+
+        printf("\nОшибка. Введена пустая строка.\n");
+        return 0;
+    }
+
+    int inputIndex = 0, countX = 0, countXX = 0;
+    for ( ; inputIndex < *inputSize; inputIndex++) {
+
+        if ( *(inputString + inputIndex) == 'x') {
+
+            ++countX;
+        }
+
+        else if( *(inputString + inputIndex) == '^') {
+
+            ++countXX;
+        }
+
+        if ( !( isdigit( *(inputString + inputIndex) ) ) && ( *(inputString + inputIndex) != 'x' ) && ( *(inputString + inputIndex) != '+') && (*(inputString + inputIndex) != '-') && (*(inputString + inputIndex) != '^')) {
+
+            printf("\nОшибка. Введен неверный символ: %c.\n", *(inputString + inputIndex) );
+            return 0;
+        }
+
+        else if ( *( inputString + inputIndex) == 'x' && isdigit( *(inputString + inputIndex + 1) ) ) {
+
+            printf("\nОшибка. Введен неверный формат квадратного уравнения. Коэффициенты должны быть до x.\n");
+            return 0;
+        }
+
+        else if( ( *( inputString + inputIndex ) == '+' || *( inputString + inputIndex ) == '-') && ( *( inputString + inputIndex + 1 ) == '+' || *( inputString + inputIndex + 1) == '-' ) ) {
+
+            printf("\nОшибка. Введен лишний символ %c.\n", *( inputString + inputIndex + 1) );
+            return 0;
+        }
+
+        else if ( countX > 2 || countXX > 1 ) {
+
+            printf("\nОшибка. Введен неверный формат квадратного уравнения.\n");
+            return 0;
+        }
+
+        else if( *(inputString + inputIndex) == '^' && *(inputString + inputIndex + 1) != '2') {
+
+            printf("\nОшибка. Уравнение не второй степени.");
+            return 0;
+        }
+
+    }
+    return 1;
 }
