@@ -3,13 +3,7 @@
 #include <ctype.h>
 #include <math.h>
 
-void push(char el, char* myStack, int* stackSize);
-
-char pop( char* myStack, int* stackSize);
-
-double getInt( char number[], int sizeNumber);
-
-double getNumber( char number[], int sizeNumber, double parametr, int numberSign, char* myStack, int* stackSize);
+double getInt( char* number, int* sizeNumber, int numberSign, double parametr);
 
 int correctInput( char* inputString, int inputIndex );
 
@@ -21,10 +15,7 @@ int main( ) {
 
     const int maxArraySize = 100; // Максимальная длина строки( константа )
 
-    char myStack[ maxArraySize ]; // Стек
-    int stackSize = 0; // Размера стека
-
-    char inputString[ maxArraySize ]{};
+    char inputString[ maxArraySize ] = {};
 
     scanf("%s", inputString);
 
@@ -40,6 +31,9 @@ int main( ) {
 
     int numberSign = 1; // Знак коэффициентов
 
+    char number[ maxArraySize ] = {}; // массив для коэффициентов
+    int sizeNumber = 0;
+
     for (int inputStringIndex = 0; inputStringIndex < inputSize; inputStringIndex++) {
 
         if( !correctInput( inputString, inputStringIndex ) ) { // Проверка на корректность ввода
@@ -47,31 +41,39 @@ int main( ) {
             return 0;
         }
 
-        char number[ maxArraySize ]{};
-        int sizeNumber = 0;
-
 
         if ( (isdigit( inputString[ inputStringIndex ] ) || inputString[ inputStringIndex] == '.') && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры кроме степени икса
 
-            push( inputString[ inputStringIndex ], myStack, &stackSize );
+            number[ sizeNumber++ ] = inputString[ inputStringIndex ];
         }
 
         if ( inputString[ inputStringIndex-1 ] != 'x' && (inputString[ inputStringIndex ] == '+'
         || inputString[ inputStringIndex ] == '-'
         || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ]) ) ) ) { // Подсчет коэффициента c
 
-            c = getNumber( number, sizeNumber, c, numberSign, myStack, &stackSize);
+            c = getInt( number, &sizeNumber, numberSign, c );
+
+            number[ maxArraySize ] = {};
+            sizeNumber = 0;
 
         }
 
         else if ( inputString[ inputStringIndex ] == 'x' && inputString[ inputStringIndex + 1 ] == '^') { // Подсчет коэффициента a
 
-            a = getNumber( number, sizeNumber, a, numberSign, myStack, &stackSize);
+            a = getInt( number, &sizeNumber, numberSign, a );
+
+            number[ maxArraySize ] = {};
+            sizeNumber = 0;
+
         }
 
         else if( inputString[ inputStringIndex ] == 'x') { // Подсчет коэффициента b
 
-            b = getNumber( number, sizeNumber, b, numberSign, myStack, &stackSize);
+            b = getInt( number, &sizeNumber, numberSign, b );
+
+            number[ maxArraySize ] = {};
+            sizeNumber = 0;
+
         }
 
         if ( inputString[ inputStringIndex] == '-') {
@@ -83,11 +85,14 @@ int main( ) {
 
             numberSign = 1;
         }
+
     }
 
     double D = b * b - 4 * a * c;
 
     if ( D < 0) {
+
+        printf("a: %.1f b: %.1f c: %.1f\n", a, b, c);
 
         printf("Действительных корней нет");
 
@@ -107,66 +112,51 @@ int main( ) {
         printf("a: %.1f b: %.1f c: %.1f\n", a, b, c);
 
         if ( x1 == x2) {
+
             printf("Корни совпадают и равны %.1f", x1);
         }
 
         else {
+
             printf("Меньший корень уравнения: %.1f\nБольший корень уравнения: %.1f", x1, x2);
         }
     }
 
 }
 
-void push( char el, char* myStack, int* stackSize) {
-    *( myStack + (*stackSize) ) = el;
-    (*stackSize)++;
-}
-char pop( char* myStack, int* stackSize) {
-    (*stackSize)--;
-    return *( myStack + (*stackSize) );
-}
-double getInt( char number[], int sizeNumber ) {
+double getInt( char* number, int* sizeNumber, int numberSign, double parametr ) {
 
-    int indexNumber = 0;
-    for ( ; indexNumber < ( sizeNumber / 2); indexNumber++) { // цикл для reverse
-        int tmp = number[ indexNumber ];
-        number[ indexNumber ] = number[ sizeNumber - 1 - indexNumber];
-        number[ sizeNumber - 1 - indexNumber] = tmp;
+    if ( (*sizeNumber) == 0) {
+
+        return parametr * numberSign;
     }
 
     double result = 0.0, power = 1.0;
+    int indexNumber = 0;
 
-    for( indexNumber = 0; isdigit( number[ indexNumber ] ); indexNumber++) {
+    for( ; isdigit( *( number + indexNumber ) ) && indexNumber < (*sizeNumber); indexNumber++) {
 
-        result = result * 10.0 + ( number[ indexNumber ] - '0' );
+        result = result * 10.0 + ( *(number + indexNumber) - '0' );
 
     }
 
-    if ( number[ indexNumber ] == '.' ) {
+    if ( *(number + indexNumber) == '.' ) {
+
         indexNumber++;
 
     }
 
-    for( ; isdigit( number[ indexNumber ] ) && indexNumber < sizeNumber; indexNumber++) {
+    for( ; isdigit( *( number + indexNumber ) ) && indexNumber < (*sizeNumber); indexNumber++) {
 
-        result = result * 10.0 + ( number[ indexNumber ] - '0' );
+        result = result * 10.0 + ( *(number + indexNumber) - '0' );
         power *= 10.0;
     }
 
 
-    return result / power;
+    return numberSign * result / power;
 
 }
-double getNumber( char number[], int sizeNumber, double parametr, int numberSign, char* myStack, int* stackSize) {
 
-    while( *stackSize > 0 ) {
-
-        number[ sizeNumber++ ] = pop( myStack, stackSize );
-    }
-
-    if( sizeNumber != 0 ) return ( getInt( number, sizeNumber ) * numberSign );
-    else return ( parametr *= numberSign );
-}
 int correctInput( char* inputString, int inputIndex ) {
 
     int countX = 0, countXX = 0;
