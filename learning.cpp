@@ -3,9 +3,13 @@
 #include <ctype.h>
 #include <math.h>
 
-double getInt( char* number, int* sizeNumber, int numberSign, double parametr);
+double getInt( char* number, int* sizeNumber, int numberSign, double parametr, int maxArraySize);
 
 int correctInput( char* inputString, int inputIndex );
+
+double getDiscriminant( double a, double b, double c );
+
+void getRoots( double D, double  a, double b );
 
 int main( ) {
 
@@ -42,37 +46,29 @@ int main( ) {
         }
 
 
-        if ( (isdigit( inputString[ inputStringIndex ] ) || inputString[ inputStringIndex] == '.') && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры кроме степени икса
+        if ( (isdigit( inputString[ inputStringIndex ] ) || inputString[ inputStringIndex] == '.')
+        && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры кроме степени икса
 
             number[ sizeNumber++ ] = inputString[ inputStringIndex ];
         }
 
-        if ( inputString[ inputStringIndex-1 ] != 'x' && (inputString[ inputStringIndex ] == '+'
+        if ( inputString[ inputStringIndex-1 ] != 'x' && inputString[ inputStringIndex - 2] != '^' && (inputString[ inputStringIndex ] == '+'
         || inputString[ inputStringIndex ] == '-'
         || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ]) ) ) ) { // Подсчет коэффициента c
 
-            c = getInt( number, &sizeNumber, numberSign, c );
-
-            number[ maxArraySize ] = {};
-            sizeNumber = 0;
+            c = getInt( number, &sizeNumber, numberSign, c, maxArraySize );
 
         }
 
         else if ( inputString[ inputStringIndex ] == 'x' && inputString[ inputStringIndex + 1 ] == '^') { // Подсчет коэффициента a
 
-            a = getInt( number, &sizeNumber, numberSign, a );
-
-            number[ maxArraySize ] = {};
-            sizeNumber = 0;
+            a = getInt( number, &sizeNumber, numberSign, a, maxArraySize );
 
         }
 
         else if( inputString[ inputStringIndex ] == 'x') { // Подсчет коэффициента b
 
-            b = getInt( number, &sizeNumber, numberSign, b );
-
-            number[ maxArraySize ] = {};
-            sizeNumber = 0;
+            b = getInt( number, &sizeNumber, numberSign, b, maxArraySize );
 
         }
 
@@ -88,43 +84,13 @@ int main( ) {
 
     }
 
-    double D = b * b - 4 * a * c;
+    double D = getDiscriminant( a, b, c );
 
-    if ( D < 0) {
-
-        printf("a: %.1f b: %.1f c: %.1f\n", a, b, c);
-
-        printf("Действительных корней нет");
-
-    }
-
-    else if ( a == 0) {
-
-        printf("Уравнение не квадратное. Старший коэффициент равен нулю");
-    }
-
-    else {
-
-        double x1 = ( - b - sqrt( D ) ) / (2 * a);
-
-        double x2 = ( - b + sqrt( D ) ) / (2 * a);
-
-        printf("a: %.1f b: %.1f c: %.1f\n", a, b, c);
-
-        if ( x1 == x2) {
-
-            printf("Корни совпадают и равны %.1f", x1);
-        }
-
-        else {
-
-            printf("Меньший корень уравнения: %.1f\nБольший корень уравнения: %.1f", x1, x2);
-        }
-    }
+    getRoots( D, a, b);
 
 }
 
-double getInt( char* number, int* sizeNumber, int numberSign, double parametr ) {
+double getInt( char* number, int* sizeNumber, int numberSign, double parametr, int maxArraySize ) {
 
     if ( (*sizeNumber) == 0) {
 
@@ -152,6 +118,8 @@ double getInt( char* number, int* sizeNumber, int numberSign, double parametr ) 
         power *= 10.0;
     }
 
+    number[ maxArraySize ] ={};
+    *sizeNumber = 0;
 
     return numberSign * result / power;
 
@@ -211,4 +179,30 @@ int correctInput( char* inputString, int inputIndex ) {
     }
 
     return 1;
+}
+
+double getDiscriminant( double a, double b, double c ) {
+
+    printf("a: %.1f b: %.1f c: %.1f\n", a, b, c);
+
+    if ( a == 0 ) return -1.0;
+
+    else if (  b * b - 4 * a * c  >= 0.0 ) return  b * b - 4 * a * c;
+
+    else return -2.0;
+
+}
+
+void getRoots( double D, double a, double b) {
+
+    if ( D == -1.0 ) printf("Уравнение не квадратное. Старший коэффициент равен нулю");
+
+    else if ( D == -2.0 ) printf("Нет корней.");
+
+    double x1 = ( - b - sqrt( D ) ) / ( 2 * a );
+
+    double x2 = ( - b + sqrt( D ) ) / ( 2 * a );
+
+    ( x1 == x2) ? printf("Корни совпадают и равны %.1f", x1) :
+    printf("Меньший корень уравнения: %.1f\nБольший корень уравнения: %.1f\n", x1, x2);
 }
