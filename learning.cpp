@@ -47,7 +47,7 @@ int main( ) {
 
 
         if ( (isdigit( inputString[ inputStringIndex ] ) || inputString[ inputStringIndex] == '.')
-        && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры кроме степени икса
+        && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры, кроме степени икса, и точку
 
             number[ sizeNumber++ ] = inputString[ inputStringIndex ];
         }
@@ -118,7 +118,8 @@ double getInt( char* number, int* sizeNumber, int numberSign, double parametr, i
         power *= 10.0;
     }
 
-    number[ maxArraySize ] ={};
+    memset( number, '\0', *sizeNumber);
+
     *sizeNumber = 0;
 
     return numberSign * result / power;
