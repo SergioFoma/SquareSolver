@@ -31,7 +31,7 @@ int main( ) {
         return 0;
     }
 
-    double a = 1, b = 1, c  = 1; // коэффициенты квадратного уравнения ( по умолчанию 1)
+    double a = 0, b = 0, c  = 0; // коэффициенты квадратного уравнения ( по умолчанию 0)
 
     int numberSign = 1; // Знак коэффициентов
 
@@ -52,9 +52,10 @@ int main( ) {
             number[ sizeNumber++ ] = inputString[ inputStringIndex ];
         }
 
-        if ( inputString[ inputStringIndex-1 ] != 'x' && inputString[ inputStringIndex - 2] != '^' && (inputString[ inputStringIndex ] == '+'
+        if ( inputString[ inputStringIndex-1 ] != 'x' && inputString[ inputStringIndex - 2] != '^'
+        && inputString[ inputStringIndex - 1] != '^' && (inputString[ inputStringIndex ] == '+'
         || inputString[ inputStringIndex ] == '-'
-        || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ]) ) ) ) { // Подсчет коэффициента c
+        || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ])  ) ) ) { // Подсчет коэффициента c
 
             c = getInt( number, &sizeNumber, numberSign, c, maxArraySize );
 
@@ -92,9 +93,9 @@ int main( ) {
 
 double getInt( char* number, int* sizeNumber, int numberSign, double parametr, int maxArraySize ) {
 
-    if ( (*sizeNumber) == 0) {
+    if ( (*sizeNumber) == 0 ) {
 
-        return parametr * numberSign;
+        return 1.0 * numberSign;
     }
 
     double result = 0.0, power = 1.0;
@@ -200,10 +201,14 @@ void getRoots( double D, double a, double b) {
 
     else if ( D == -2.0 ) printf("Нет корней.");
 
-    double x1 = ( - b - sqrt( D ) ) / ( 2 * a );
+    else {
 
-    double x2 = ( - b + sqrt( D ) ) / ( 2 * a );
+        double x1 = ( - b - sqrt( D ) ) / ( 2 * a );
 
-    ( x1 == x2) ? printf("Корни совпадают и равны %.1f", x1) :
-    printf("Меньший корень уравнения: %.1f\nБольший корень уравнения: %.1f\n", x1, x2);
+        double x2 = ( - b + sqrt( D ) ) / ( 2 * a );
+
+        ( x1 == x2) ? printf("Корни совпадают и равны %.1f", x1) :
+        printf("Меньший корень уравнения: %.1f\nБольший корень уравнения: %.1f\n", x1, x2);
+
+    }
 }
