@@ -2,213 +2,184 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <math.h>
+#include <stdlib.h>
 
-double getInt( char* number, int* sizeNumber, int numberSign, double parametr, int maxArraySize);
+enum rootsCount {
 
-int correctInput( char* inputString, int inputIndex );
+    zeroRoot = 0,
+    twoRoot = 1,
+    oneRoot = 2,
+    alotRoot = 3,
+    twoSameRoot = 4
 
-double getDiscriminant( double a, double b, double c );
+}; // возможное количество решений
 
-void getRoots( double D, double  a, double b );
+const double delta = 1e-8; // Дельта окрестность
+
+struct Coefficients {
+
+    double a;
+    double b;
+    double c;
+};
+
+double getDiscriminant( struct Coefficients coefficients );
+
+void solveSquare( struct Coefficients coefficients );
+
+void solveEquation( struct Coefficients coefficients );
+
+void printResault( rootsCount typeOfEquation, struct Coefficients coefficients , double result1, double result2 );
+
+void solveLinear( struct Coefficients coefficients );
 
 int main( ) {
 
-    printf("Правило ввода: Если хотите возвести в степень, введите символ '^'\n\n"
-    "Если хотите умножить число на неизвестную  переменную, введите число с учетом знака, а затем переменнную без пробелов\n\n"
-    "Пример: 5 умножить на x эквивалетно записи 5x, x возвести в степень 2 эквивалентно записи x^2\n\n");
+    printf("Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
+    " на следующей строке через пробел: \n\n");
 
-    const int maxArraySize = 100; // Максимальная длина строки( константа )
+    Coefficients coefficients;
 
-    char inputString[ maxArraySize ] = {};
+    if ( scanf("%lg %lg %lg", &coefficients.a, &coefficients.b, &coefficients.c) < 3 ) {
 
-    scanf("%s", inputString);
-
-    int inputSize = strlen( inputString) ; // размер строки ввода
-
-    if( inputSize == 0) {
-
-        printf("\nВведена пустая строка.");
+        printf("\nОшибка. Введен неверный формат квадратного уравнения.");
         return 0;
     }
 
-    double a = 0, b = 0, c  = 0; // коэффициенты квадратного уравнения ( по умолчанию 0)
+    solveEquation( coefficients );
 
-    int numberSign = 1; // Знак коэффициентов
+    return 0;
+}
 
-    char number[ maxArraySize ] = {}; // массив для коэффициентов
-    int sizeNumber = 0;
+//----------------------------------------------------------------------------------------------------
+//!
+//! @param [in] a   a - коэффициент
+//! @param [in] b   b - коэффициент
+//! @param [in] c   c - коэффициент
+//! @param [in] delta delta - эпсилон окрестноть
+//!
+//! @note   Вызывает либо решение линейного уравнения ( solveLinear ), либо квадратного (solveSquare ).
+//!
+//!----------------------------------------------------------------------------------------------------
 
-    for (int inputStringIndex = 0; inputStringIndex < inputSize; inputStringIndex++) {
+void solveEquation( struct Coefficients coefficients ) {
 
-        if( !correctInput( inputString, inputStringIndex ) ) { // Проверка на корректность ввода
+    if ( fabs( coefficients.a ) <= delta ) {
 
-            return 0;
-        }
-
-
-        if ( (isdigit( inputString[ inputStringIndex ] ) || inputString[ inputStringIndex] == '.')
-        && inputString[ inputStringIndex - 1] != '^' ) { // Добавляем все цифры, кроме степени икса, и точку
-
-            number[ sizeNumber++ ] = inputString[ inputStringIndex ];
-        }
-
-        if ( inputString[ inputStringIndex-1 ] != 'x' && inputString[ inputStringIndex - 2] != '^'
-        && inputString[ inputStringIndex - 1] != '^' && (inputString[ inputStringIndex ] == '+'
-        || inputString[ inputStringIndex ] == '-'
-        || ( inputStringIndex == inputSize - 1 && isdigit(inputString[ inputStringIndex ])  ) ) ) { // Подсчет коэффициента c
-
-            c = getInt( number, &sizeNumber, numberSign, c, maxArraySize );
-
-        }
-
-        else if ( inputString[ inputStringIndex ] == 'x' && inputString[ inputStringIndex + 1 ] == '^') { // Подсчет коэффициента a
-
-            a = getInt( number, &sizeNumber, numberSign, a, maxArraySize );
-
-        }
-
-        else if( inputString[ inputStringIndex ] == 'x') { // Подсчет коэффициента b
-
-            b = getInt( number, &sizeNumber, numberSign, b, maxArraySize );
-
-        }
-
-        if ( inputString[ inputStringIndex] == '-') {
-
-            numberSign = -1;
-        }                                       // меняем знак, если его нашли
-
-        else if ( inputString[ inputStringIndex ] == '+') {
-
-            numberSign = 1;
-        }
-
+        solveLinear( coefficients );
     }
-
-    double D = getDiscriminant( a, b, c );
-
-    getRoots( D, a, b);
+    else {
+        solveSquare( coefficients );
+    }
 
 }
 
-double getInt( char* number, int* sizeNumber, int numberSign, double parametr, int maxArraySize ) {
 
-    if ( (*sizeNumber) == 0 ) {
+//!------------------------------------------------------------------
+//!
+//! @param [in] a   a - коэффициент
+//! @param [in] b   b - коэффициент
+//! @param [in] c   c - коэффициент
+//!
+//! @note Решает квадратное уравнение
+//!------------------------------------------------------------------
+void solveSquare( struct Coefficients coefficients ) {
 
-        return 1.0 * numberSign;
+    double D = coefficients.b * coefficients.b - 4 * coefficients.a * coefficients.c;
+
+    if ( D < -delta ) {
+
+        printResault( zeroRoot, coefficients, 0, 0 );
     }
-
-    double result = 0.0, power = 1.0;
-    int indexNumber = 0;
-
-    for( ; isdigit( *( number + indexNumber ) ) && indexNumber < (*sizeNumber); indexNumber++) {
-
-        result = result * 10.0 + ( *(number + indexNumber) - '0' );
-
-    }
-
-    if ( *(number + indexNumber) == '.' ) {
-
-        indexNumber++;
-
-    }
-
-    for( ; isdigit( *( number + indexNumber ) ) && indexNumber < (*sizeNumber); indexNumber++) {
-
-        result = result * 10.0 + ( *(number + indexNumber) - '0' );
-        power *= 10.0;
-    }
-
-    memset( number, '\0', *sizeNumber);
-
-    *sizeNumber = 0;
-
-    return numberSign * result / power;
-
-}
-
-int correctInput( char* inputString, int inputIndex ) {
-
-    int countX = 0, countXX = 0;
-
-    if ( *(inputString + inputIndex) == 'x') {
-
-        ++countX;
-    }
-
-    else if( *(inputString + inputIndex) == '^') {
-
-        ++countXX;
-    }
-
-    if ( !( isdigit( *(inputString + inputIndex) ) ) && ( *(inputString + inputIndex) != 'x' )
-    && ( *(inputString + inputIndex) != '+') && (*(inputString + inputIndex) != '-')
-    && (*(inputString + inputIndex) != '^') && ( *(inputString + inputIndex) != '.' ) ) {
-
-        printf("\nОшибка. Введен неверный символ: %c\n", *(inputString + inputIndex) );
-        return 0;
-    }
-
-    else if ( *( inputString + inputIndex) == 'x' && isdigit( *(inputString + inputIndex + 1) ) ) {
-
-        printf("\nОшибка. Введен неверный формат квадратного уравнения. Коэффициенты должны быть до x.\n");
-        return 0;
-    }
-
-    else if( ( *( inputString + inputIndex ) == '+' || *( inputString + inputIndex ) == '-' || *(inputString + inputIndex) == '.')
-    && ( *( inputString + inputIndex + 1 ) == '+' || *( inputString + inputIndex + 1) == '-' || *(inputString + inputIndex + 1) == '.' ) ) {
-
-        printf("\nОшибка. Введен лишний символ %c\n", *( inputString + inputIndex + 1) );
-        return 0;
-    }
-
-    else if ( countX > 2 || countXX > 1 ) {
-
-        printf("\nОшибка. Введен неверный формат квадратного уравнения.\n");
-        return 0;
-    }
-
-    else if( *(inputString + inputIndex) == '^' && *(inputString + inputIndex + 1) != '2') {
-
-        printf("\nОшибка. Уравнение не второй степени.");
-        return 0;
-    }
-
-    else if( *(inputString + inputIndex) == '^'&& *(inputString + inputIndex - 1) != 'x') {
-
-        printf("\nОшибка. Введен неверный формат квадратного уравнения.\n");
-        return 0;
-    }
-
-    return 1;
-}
-
-double getDiscriminant( double a, double b, double c ) {
-
-    printf("a: %.1f b: %.1f c: %.1f\n", a, b, c);
-
-    if ( a == 0 ) return -1.0;
-
-    else if (  b * b - 4 * a * c  >= 0.0 ) return  b * b - 4 * a * c;
-
-    else return -2.0;
-
-}
-
-void getRoots( double D, double a, double b) {
-
-    if ( D == -1.0 ) printf("Уравнение не квадратное. Старший коэффициент равен нулю");
-
-    else if ( D == -2.0 ) printf("Нет корней.");
 
     else {
 
-        double x1 = ( - b - sqrt( D ) ) / ( 2 * a );
+        double firstPart = - coefficients.b / ( 2 * coefficients.a );
+        double secondPart = sqrt( D ) / ( 2 * coefficients.a );
 
-        double x2 = ( - b + sqrt( D ) ) / ( 2 * a );
+        double x1 = firstPart - secondPart;
+        double x2 = firstPart + secondPart;
 
-        ( x1 == x2) ? printf("Корни совпадают и равны %.1f", x1) :
-        printf("Меньший корень уравнения: %.1f\nБольший корень уравнения: %.1f\n", x1, x2);
+        if ( fabs( x1  - x2 ) <= delta ) {
 
+            printResault( twoSameRoot, coefficients, x1, x2 );
+        }
+        else {
+
+            printResault( twoRoot, coefficients, x1, x2 );
+        }
     }
+}
+
+//!---------------------------------------------------------------------------------------------------
+//!
+//! @param [in] typeOfEquation typeOfEquation - тип уравнения
+//! @param [in] a               a - коэффициент
+//! @param [in] b               b - коэффициент
+//! @param [in] c               c - коэффициент
+//! @param [in] result1         result1 - первый корень
+//! @param [in] result2         result2 - второй корень
+//!
+//! @note Выводит соответсвующие пояснение и решение
+//!---------------------------------------------------------------------------------------------------
+void printResault( rootsCount typeOfEquation, struct Coefficients coefficients, double result1, double result2 ) {
+
+    printf("\na: %lg b: %lg c: %lg\n", coefficients.a, coefficients.b, coefficients.c );
+
+    switch ( typeOfEquation ) {
+
+        case zeroRoot:
+
+            printf("\nНет корней.");
+            break;
+
+        case twoRoot:
+
+            printf("\nУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg", result1, result2 );
+            break;
+
+        case oneRoot:
+
+            printf("\nУравнение линейное.\nКорень уравнения: %lg", result1 );
+            break;
+
+        case alotRoot:
+
+            printf("\nУравнение имеет бесконечное количество корней.");
+            break;
+
+        case twoSameRoot:
+
+            printf("\nУравнение квадратное.\nИмеет единственный корень: %lg", result1 );
+            break;
+
+        default:
+
+            printf("\nОшибка. Не определено количество корней.");
+            break;
+    }
+}
+//!-------------------------------------
+//!
+//! @param [in] b   b - коэффициент
+//! @param [in] c   c - коэффициент
+//!
+//! @note Решает линейное уравнение
+//!------------------------------------
+void solveLinear( struct Coefficients coefficients ) {
+
+    if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) <= delta ) {
+
+        printResault( alotRoot, coefficients, 0, 0 );
+    }
+    else if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) >= delta ){
+
+        printResault( zeroRoot, coefficients, 0, 0 );
+    }
+    else {
+
+        double result = -coefficients.c / coefficients.b;
+        printResault( oneRoot, coefficients, result, result );
+    }
+
 }
