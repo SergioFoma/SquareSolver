@@ -4,7 +4,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-enum rootsCount {
+enum RootsCount {
 
     zeroRoot = 0,
     twoRoot = 1,
@@ -23,15 +23,21 @@ struct Coefficients {
     double c;
 };
 
-double getDiscriminant( struct Coefficients coefficients );
+struct AnswerQuestion {
 
-void solveSquare( struct Coefficients coefficients );
+    double x1;
+    double x2;
 
-void solveEquation( struct Coefficients coefficients );
+    RootsCount countRoots;
+};
 
-void printResault( rootsCount typeOfEquation, struct Coefficients coefficients , double result1, double result2 );
+AnswerQuestion solveEquation( struct Coefficients coefficients );
 
-void solveLinear( struct Coefficients coefficients );
+void solveSquare( struct Coefficients coefficients, double* x1, double* x2, RootsCount* countRoots );
+
+void solveLinear( struct Coefficients coefficients, double* x1, double* x2, RootsCount* countRoots );
+
+void printResult( struct Coefficients coefficients, struct AnswerQuestion answer );
 
 int main( ) {
 
@@ -46,50 +52,55 @@ int main( ) {
         return 0;
     }
 
-    solveEquation( coefficients );
+    AnswerQuestion answer = solveEquation( coefficients );
+    printResult( coefficients, answer );
 
     return 0;
 }
 
-//----------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 //!
-//! @param [in] a   a - коэффициент
-//! @param [in] b   b - коэффициент
-//! @param [in] c   c - коэффициент
-//! @param [in] delta delta - эпсилон окрестноть
+//! @param [in] coefficients    coefficients - структура, содержащая коэффициенты квадратного уравнения.
 //!
 //! @note   Вызывает либо решение линейного уравнения ( solveLinear ), либо квадратного (solveSquare ).
+//! Возращает структуру, в которую передаются корни ур - я и количество корней.
 //!
-//!----------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------
 
-void solveEquation( struct Coefficients coefficients ) {
+AnswerQuestion solveEquation( Coefficients coefficients ) {
+
+    double x1 = NAN, x2 = NAN;
+    RootsCount countRoots = zeroRoot;
 
     if ( fabs( coefficients.a ) <= delta ) {
 
-        solveLinear( coefficients );
+        solveLinear( coefficients, &x1, &x2, &countRoots );
     }
     else {
-        solveSquare( coefficients );
+
+        solveSquare( coefficients, &x1, &x2, &countRoots );
     }
 
+    AnswerQuestion answer = { x1, x2, countRoots };
+    return answer;
 }
 
 
-//!------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------
 //!
-//! @param [in] a   a - коэффициент
-//! @param [in] b   b - коэффициент
-//! @param [in] c   c - коэффициент
+//! @param [in] coefficients   coefficients - структура, содержащая коэффициенты квадратного уравнения.
+//! @param [in] *x1   *x1 - указатель на меньший корень уравнения.
+//! @param [in] *x2   *x2 - указатель на больший корень уравнения.
 //!
-//! @note Решает квадратное уравнение
-//!------------------------------------------------------------------
-void solveSquare( struct Coefficients coefficients ) {
+//! @note Решает квадратное уравнение, записывает результат в x1, x2 и countRoots соответственно.
+//-----------------------------------------------------------------------------------------------------
+void solveSquare( Coefficients coefficients, double* x1, double* x2, RootsCount* countRoots ) {
 
     double D = coefficients.b * coefficients.b - 4 * coefficients.a * coefficients.c;
 
     if ( D < -delta ) {
 
-        printResault( zeroRoot, coefficients, 0, 0 );
+        *countRoots = zeroRoot;
     }
 
     else {
@@ -97,36 +108,25 @@ void solveSquare( struct Coefficients coefficients ) {
         double firstPart = - coefficients.b / ( 2 * coefficients.a );
         double secondPart = sqrt( D ) / ( 2 * coefficients.a );
 
-        double x1 = firstPart - secondPart;
-        double x2 = firstPart + secondPart;
-
-        if ( fabs( x1  - x2 ) <= delta ) {
-
-            printResault( twoSameRoot, coefficients, x1, x2 );
-        }
-        else {
-
-            printResault( twoRoot, coefficients, x1, x2 );
-        }
+        *x1 = firstPart - secondPart;
+        *x2 = firstPart + secondPart;
+        *countRoots = ( *x1 == *x2 ) ? twoSameRoot: twoRoot;
     }
 }
 
-//!---------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------
 //!
-//! @param [in] typeOfEquation typeOfEquation - тип уравнения
-//! @param [in] a               a - коэффициент
-//! @param [in] b               b - коэффициент
-//! @param [in] c               c - коэффициент
-//! @param [in] result1         result1 - первый корень
-//! @param [in] result2         result2 - второй корень
+//! @param [in] coefficients   coefficients - структура, содержащая коэффициенты квадратного уравнения.
+//! @param [in] answer         answer - структура, сожеражащая корни уравнения и их количество.
 //!
-//! @note Выводит соответсвующие пояснение и решение
-//!---------------------------------------------------------------------------------------------------
-void printResault( rootsCount typeOfEquation, struct Coefficients coefficients, double result1, double result2 ) {
+//! @note Выводит соответсвующие пояснение и решение.
+//!
+//-----------------------------------------------------------------------------------------------------
+void printResult( Coefficients coefficients, AnswerQuestion answer ) {
 
     printf("\na: %lg b: %lg c: %lg\n", coefficients.a, coefficients.b, coefficients.c );
 
-    switch ( typeOfEquation ) {
+    switch ( answer.countRoots ) {
 
         case zeroRoot:
 
@@ -135,12 +135,12 @@ void printResault( rootsCount typeOfEquation, struct Coefficients coefficients, 
 
         case twoRoot:
 
-            printf("\nУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg", result1, result2 );
+            printf("\nУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg", answer.x1, answer.x2 );
             break;
 
         case oneRoot:
 
-            printf("\nУравнение линейное.\nКорень уравнения: %lg", result1 );
+            printf("\nУравнение линейное.\nКорень уравнения: %lg", answer.x1 );
             break;
 
         case alotRoot:
@@ -150,7 +150,7 @@ void printResault( rootsCount typeOfEquation, struct Coefficients coefficients, 
 
         case twoSameRoot:
 
-            printf("\nУравнение квадратное.\nИмеет единственный корень: %lg", result1 );
+            printf("\nУравнение квадратное.\nИмеет единственный корень: %lg", answer.x1 );
             break;
 
         default:
@@ -159,27 +159,29 @@ void printResault( rootsCount typeOfEquation, struct Coefficients coefficients, 
             break;
     }
 }
-//!-------------------------------------
+//-----------------------------------------------------------------------------------------------------
 //!
-//! @param [in] b   b - коэффициент
-//! @param [in] c   c - коэффициент
+//! @param [in] coefficients   coefficients - структура, содержащая коэффициенты квадратного уравнения.
+//! @param [in] *x1   *x1 - указатель на меньший корень уравнения.
+//! @param [in] *x2   *x2 - указатель на больший корень уравнения.
 //!
-//! @note Решает линейное уравнение
-//!------------------------------------
-void solveLinear( struct Coefficients coefficients ) {
+//! @note Решает линейное уравнение, результат записывает в x1, x2 и countRoots соотвественно.
+//!
+//------------------------------------------------------------------------------------------------------
+void solveLinear( Coefficients coefficients, double* x1, double* x2, RootsCount* countRoots ) {
 
     if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) <= delta ) {
 
-        printResault( alotRoot, coefficients, 0, 0 );
+        *countRoots = alotRoot;
     }
     else if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) >= delta ){
 
-        printResault( zeroRoot, coefficients, 0, 0 );
+        *countRoots = zeroRoot;
     }
     else {
 
-        double result = -coefficients.c / coefficients.b;
-        printResault( oneRoot, coefficients, result, result );
+        *x1 = *x2 = -coefficients.c / coefficients.b;
+        *countRoots = oneRoot;
     }
 
 }
