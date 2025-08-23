@@ -9,9 +9,9 @@ enum RootsCount {
     alotRoot = 3,
     twoSameRoot = 4
 
-}; // РІРѕР·РјРѕР¶РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЂРµС€РµРЅРёР№
+}; // возможное количество решений
 
-const double delta = 1e-5; // Р”РµР»СЊС‚Р° РѕРєСЂРµСЃС‚РЅРѕСЃС‚СЊ
+const double delta = 1e-5; // Дельта окрестность
 
 struct Coefficients {
 
