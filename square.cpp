@@ -13,7 +13,7 @@ int inputCoefficient( Coefficients* coefficients );
 int main( int argc, char **argv ) {
 
 
-    if ( flagSearch( argc, argv ) ) {
+    if ( flagSearch( argc, argv ) ) { // Проверяем, ввел ли что - то пользователь кроме result.exe
         test();
         return 0;
     }
