@@ -5,14 +5,6 @@
 #include <stdlib.h>
 #include <assert.h>
 
-//------------------------------------------------------------------------------------------------------
-//!
-//! @param [in] coefficients    coefficients - структура, содержащая коэффициенты квадратного уравнения.
-//!
-//! @note   Вызывает либо решение линейного уравнения ( solveLinear ), либо квадратного (solveSquare ).
-//! Возращает структуру, в которую передаются корни ур - я и количество корней.
-//!
-//------------------------------------------------------------------------------------------------------
 SolveResult solveEquation( Coefficients coefficients ) {
 
     double x1 = NAN, x2 = NAN;
@@ -29,16 +21,6 @@ SolveResult solveEquation( Coefficients coefficients ) {
 
     return { x1, x2, countRoots };
 }
-
-//----------------------------------------------------------------------------------------------------
-//!
-//! @param [in] coefficients   coefficients - структура, содержащая коэффициенты квадратного уравнения.
-//! @param [in] *x1   *x1 - указатель на меньший корень уравнения.
-//! @param [in] *x2   *x2 - указатель на больший корень уравнения.
-//! @param [in] *countRoots    *countRoots- указатель на количество корней.
-//!
-//! @note Решает квадратное уравнение, записывает результат в x1, x2 и countRoots соответственно.
-//-----------------------------------------------------------------------------------------------------
 
 void solveSquare( Coefficients coefficients, double* x1, double* x2, RootsCount* countRoots ) {
 
@@ -63,17 +45,6 @@ void solveSquare( Coefficients coefficients, double* x1, double* x2, RootsCount*
         *countRoots = ( fabs( *x1 - *x2) < delta ) ? twoSameRoot: twoRoot;
     }
 }
-
-//-----------------------------------------------------------------------------------------------------
-//!
-//! @param [in] coefficients   coefficients - структура, содержащая коэффициенты квадратного уравнения.
-//! @param [in] *x1   *x1 - указатель на меньший корень уравнения.
-//! @param [in] *x2   *x2 - указатель на больший корень уравнения.
-//! @param [in] *countRoots    *countRoots- указатель на количество корней.
-//!
-//! @note Решает линейное уравнение, результат записывает в x1, x2 и countRoots соотвественно.
-//!
-//------------------------------------------------------------------------------------------------------
 
 void solveLinear( Coefficients coefficients, double* x1, double* x2, RootsCount* countRoots ) {
 

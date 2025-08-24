@@ -1,10 +1,10 @@
 #include <TXLib.h>
 #include <stdio.h>
+#include <math.h>
+
 #include "solver.h"
 #include "test.h"
 #include "flagSearch.h"
-
-#include <math.h>
 
 void printResult( Coefficients coefficients, SolveResult answer );
 
@@ -13,7 +13,7 @@ int inputCoefficient( Coefficients* coefficients );
 int main( int argc, char **argv ) {
 
 
-    if ( flagSearch( argc, argv ) ) { // Проверяем, ввел ли что - то пользователь кроме result.exe
+    if ( flagSearch( argc, argv ) ) {
         test();
         return 0;
     }
@@ -85,7 +85,9 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 //!
 //! @param [in] *coefficients   *coefficients - указатель на структура, получающую коэффициенты.
 //!
-//! @note Считывает коэффициенты с ввода пользователя.
+//! @result 1 при успешном считывании, 0 при безуспешномю
+//!
+//! @note Считывает коэффициенты с ввода пользователя в coefficients.
 //!
 //-----------------------------------------------------------------------------------------------------
 int inputCoefficient( Coefficients* coefficients) {
