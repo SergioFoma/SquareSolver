@@ -84,14 +84,15 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 //!
 //! @param [in] *coefficients   *coefficients - указатель на структура, получающую коэффициенты.
 //!
-//! @result 1 при успешном считывании, 0 при безуспешномю
+//! @result 1 при успешном считывании, 0 при безуспешном.
 //!
 //! @note Считывает коэффициенты с ввода пользователя в coefficients.
 //!
 //-----------------------------------------------------------------------------------------------------
 int inputCoefficient( Coefficients* coefficients) {
 
-
+    assert( coefficients );
+    
     if ( scanf("%lg %lg %lg", &( (*coefficients).a ), &( (*coefficients).b ), &( (*coefficients).c ) ) < 3 ) {
 
         printf("\nОшибка. Введен неверный формат квадратного уравнения.");
