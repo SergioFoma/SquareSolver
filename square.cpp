@@ -12,8 +12,7 @@ int inputCoefficient( Coefficients* coefficients );
 
 int main( int argc, char **argv ) {
 
-
-    if ( flagSearch( argc, argv ) ) {
+    if ( flagSearch( argc, argv, "--Test" ) ) {
         test();
         return 0;
     }
@@ -102,7 +101,7 @@ int inputCoefficient( Coefficients* coefficients) {
     if ( !isfinite( (*coefficients).a ) || !isfinite( (*coefficients).b ) ||
          !isfinite( (*coefficients).c) ) {
 
-            return 0;
+        return 0;
     }
 
 

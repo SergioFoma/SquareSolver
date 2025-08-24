@@ -11,6 +11,6 @@
  //! @note В введеной строке ищет строку отличную от result.exe. Возращает результат поиска.
  //!
  //!----------------------------------------------------------------------------------------
-int flagSearch( int argc, char **argv );
+int flagSearch( int argc, char **argv, const char* flag);
 
 #endif
