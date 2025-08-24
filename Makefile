@@ -8,8 +8,6 @@ SOURCES = square.cpp solver.cpp test.cpp flagSearch.cpp
 OBJECTS_WITHOUT_PREFIX = $(SOURCES:.cpp=.obj)
 OBJECTS = $(addprefix $(BUILD_DIR)/, $(OBJECTS_WITHOUT_PREFIX))
 
-
-# TODO store .obj and .exe into build folder
 .PHONY: all clean
 
 all: $(EXE_NAME)
@@ -21,4 +19,4 @@ $(OBJECTS): $(BUILD_DIR)/%.obj: %.cpp
 	$(CXX) $(FLAGS) -c $^ -o $@
 
 clean:
-	rm -f $(OBJECTS) $(EXE_NAME)
+	rm -f ./$(BUILD_DIR)/$(OBJECTS) ./$(BUILD_DIR)/$(EXE_NAME)
