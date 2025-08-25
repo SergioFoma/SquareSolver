@@ -1,3 +1,4 @@
+
 #include <TXLib.h>
 #include "test.h"
 
@@ -55,6 +56,8 @@ void testFromFunction() {
 
 RootsCount getCountRoots( const char* lineCountRoots ) {
 
+    assert( lineCountRoots != NULL );
+
     if ( strcmp( lineCountRoots, "zeroRoot") == 0 ) {
 
         return zeroRoot;
@@ -82,6 +85,8 @@ RootsCount getCountRoots( const char* lineCountRoots ) {
 }
 
 void testFromFile( char* testName ) {
+
+    assert( testName != NULL );
 
     FILE* testFile;
 
@@ -142,6 +147,8 @@ void testFromFile( char* testName ) {
 }
 
 void test(TestCaseData* testData, const size_t testCount) {
+
+    assert( testData != NULL );
 
     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
 

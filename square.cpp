@@ -25,9 +25,12 @@ int main( int argc, char **argv ) {
 
             testFromFile( argv[ indexFlag + 1 ] );
         }
+        else {
+
+            printf( "Не введено имя тестирующего файла." );
+        }
         return 0;
     }
-    // option_ptr - argv < argc
 
     printf("Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
            " на следующей строке через пробел: \n\n");
