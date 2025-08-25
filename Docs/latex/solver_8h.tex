@@ -1,0 +1,138 @@
+\doxysection{solver.\+h File Reference}
+\hypertarget{solver_8h}{}\label{solver_8h}\index{solver.h@{solver.h}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct_coefficients}{Coefficients}}
+\item 
+struct \mbox{\hyperlink{struct_solve_result}{Solve\+Result}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3}{Roots\+Count}} \{ \newline
+\mbox{\hyperlink{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3aa46d1563bd974f1f9021471717ab8e3d}{zero\+Root}} = 0
+, \mbox{\hyperlink{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3aeb742e0fd9a627c1b225628bbe85bc2e}{two\+Root}} = 1
+, \mbox{\hyperlink{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ac73256ab8a96bd2ae8a6977e170e65fb}{one\+Root}} = 2
+, \mbox{\hyperlink{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ad5e8cfea12cbe2072b1e9e14a6cca7ae}{alot\+Root}} = 3
+, \newline
+\mbox{\hyperlink{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ad1cbc873b0c47009f7fdeb1f2167b02a}{two\+Same\+Root}} = 4
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{solver_8h_ac36d452e6c7a6e8aeb2ca32d03395cc2}{solve\+Equation}} (\mbox{\hyperlink{struct_coefficients}{Coefficients}} coefficients, \mbox{\hyperlink{struct_solve_result}{Solve\+Result}} \texorpdfstring{$\ast$}{*}answer)
+\item 
+void \mbox{\hyperlink{solver_8h_a27bbfd69026aabbff5b8ae66397c3598}{solve\+Square}} (\mbox{\hyperlink{struct_coefficients}{Coefficients}} coefficients, \mbox{\hyperlink{struct_solve_result}{Solve\+Result}} \texorpdfstring{$\ast$}{*}answer)
+\item 
+void \mbox{\hyperlink{solver_8h_aaf49ec4d939b19ce29b34ecc2c18896e}{solve\+Linear}} (\mbox{\hyperlink{struct_coefficients}{Coefficients}} coefficients, \mbox{\hyperlink{struct_solve_result}{Solve\+Result}} \texorpdfstring{$\ast$}{*}answer)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const double \mbox{\hyperlink{solver_8h_a80a3c65c6b77216165fc34c12d0744e9}{delta}} = 1e-\/5
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{solver_8h_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3}\index{solver.h@{solver.h}!RootsCount@{RootsCount}}
+\index{RootsCount@{RootsCount}!solver.h@{solver.h}}
+\doxysubsubsection{\texorpdfstring{RootsCount}{RootsCount}}
+{\footnotesize\ttfamily \label{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3} 
+enum \mbox{\hyperlink{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3}{Roots\+Count}}}
+
+\begin{DoxyNote}{Note}
+Содержит коды для количства корней. Количество корней -\/ код, соотвествующий этому количеству. 
+\end{DoxyNote}
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{zeroRoot@{zeroRoot}!solver.h@{solver.h}}\index{solver.h@{solver.h}!zeroRoot@{zeroRoot}}}\Hypertarget{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3aa46d1563bd974f1f9021471717ab8e3d}\label{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3aa46d1563bd974f1f9021471717ab8e3d} 
+zero\+Root&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{twoRoot@{twoRoot}!solver.h@{solver.h}}\index{solver.h@{solver.h}!twoRoot@{twoRoot}}}\Hypertarget{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3aeb742e0fd9a627c1b225628bbe85bc2e}\label{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3aeb742e0fd9a627c1b225628bbe85bc2e} 
+two\+Root&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{oneRoot@{oneRoot}!solver.h@{solver.h}}\index{solver.h@{solver.h}!oneRoot@{oneRoot}}}\Hypertarget{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ac73256ab8a96bd2ae8a6977e170e65fb}\label{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ac73256ab8a96bd2ae8a6977e170e65fb} 
+one\+Root&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{alotRoot@{alotRoot}!solver.h@{solver.h}}\index{solver.h@{solver.h}!alotRoot@{alotRoot}}}\Hypertarget{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ad5e8cfea12cbe2072b1e9e14a6cca7ae}\label{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ad5e8cfea12cbe2072b1e9e14a6cca7ae} 
+alot\+Root&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{twoSameRoot@{twoSameRoot}!solver.h@{solver.h}}\index{solver.h@{solver.h}!twoSameRoot@{twoSameRoot}}}\Hypertarget{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ad1cbc873b0c47009f7fdeb1f2167b02a}\label{solver_8h_aa25c6d8cdf0bee88e27388ccef3dcdc3ad1cbc873b0c47009f7fdeb1f2167b02a} 
+two\+Same\+Root&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{solver_8h_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{solver_8h_ac36d452e6c7a6e8aeb2ca32d03395cc2}\index{solver.h@{solver.h}!solveEquation@{solveEquation}}
+\index{solveEquation@{solveEquation}!solver.h@{solver.h}}
+\doxysubsubsection{\texorpdfstring{solveEquation()}{solveEquation()}}
+{\footnotesize\ttfamily \label{solver_8h_ac36d452e6c7a6e8aeb2ca32d03395cc2} 
+void solve\+Equation (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_coefficients}{Coefficients}}}]{coefficients}{, }\item[{\mbox{\hyperlink{struct_solve_result}{Solve\+Result}} \texorpdfstring{$\ast$}{*}}]{answer}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em coefficients} & coefficients -\/ структура, содержащая коэффициенты квадратного уравнения. \\
+\hline
+\mbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}answer} & \texorpdfstring{$\ast$}{*}answer -\/ указатель на структуру, содеражащую решение квадратного уранения.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Вызывает либо решение линейного уравнения ( solve\+Linear ), либо квадратного (solve\+Square ). Записывает в струрктуру answer корни уравнения и их количество. 
+\end{DoxyNote}
+\Hypertarget{solver_8h_aaf49ec4d939b19ce29b34ecc2c18896e}\index{solver.h@{solver.h}!solveLinear@{solveLinear}}
+\index{solveLinear@{solveLinear}!solver.h@{solver.h}}
+\doxysubsubsection{\texorpdfstring{solveLinear()}{solveLinear()}}
+{\footnotesize\ttfamily \label{solver_8h_aaf49ec4d939b19ce29b34ecc2c18896e} 
+void solve\+Linear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_coefficients}{Coefficients}}}]{coefficients}{, }\item[{\mbox{\hyperlink{struct_solve_result}{Solve\+Result}} \texorpdfstring{$\ast$}{*}}]{answer}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em coefficients} & coefficients -\/ структура, содержащая коэффициенты квадратного уравнения. \\
+\hline
+\mbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}answer} & \texorpdfstring{$\ast$}{*}answer -\/ указатель на структуру, содеражащую решение квадратного уранения.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Решает квадратное уравнение, записывает в структуру answer корни уравнения и их количество. 
+\end{DoxyNote}
+\Hypertarget{solver_8h_a27bbfd69026aabbff5b8ae66397c3598}\index{solver.h@{solver.h}!solveSquare@{solveSquare}}
+\index{solveSquare@{solveSquare}!solver.h@{solver.h}}
+\doxysubsubsection{\texorpdfstring{solveSquare()}{solveSquare()}}
+{\footnotesize\ttfamily \label{solver_8h_a27bbfd69026aabbff5b8ae66397c3598} 
+void solve\+Square (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_coefficients}{Coefficients}}}]{coefficients}{, }\item[{\mbox{\hyperlink{struct_solve_result}{Solve\+Result}} \texorpdfstring{$\ast$}{*}}]{answer}{}\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em coefficients} & coefficients -\/ структура, содержащая коэффициенты квадратного уравнения. \\
+\hline
+\mbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}answer} & \texorpdfstring{$\ast$}{*}answer -\/ указатель на структуру, содеражащую решение квадратного уранения.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Решает квадратное уравнение, записывает в структуру answer корни уравнения и их количество. 
+\end{DoxyNote}
+
+
+\label{doc-var-members}
+\Hypertarget{solver_8h_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{solver_8h_a80a3c65c6b77216165fc34c12d0744e9}\index{solver.h@{solver.h}!delta@{delta}}
+\index{delta@{delta}!solver.h@{solver.h}}
+\doxysubsubsection{\texorpdfstring{delta}{delta}}
+{\footnotesize\ttfamily \label{solver_8h_a80a3c65c6b77216165fc34c12d0744e9} 
+const double delta = 1e-\/5}
+
+\begin{DoxyNote}{Note}
+Дельта окрестность для погрешность в сравнении переменных типов double. 
+\end{DoxyNote}

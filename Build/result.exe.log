@@ -1,0 +1,432 @@
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x19F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BAD6 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D94B in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( flag - argv < argc ) {
+     23: 
+=>   24:             testFromFile( flag + 1);
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:17:13, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:19:45
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x19F8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BAD6 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D94B in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( flag - argv < argc ) {
+     23: 
+=>   24:             testFromFile( flag + 1);
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:17:13, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:19:45
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x2C2C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BADC in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D952 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( indexFlag < argc - 1) {
+     23: 
+=>   24:             testFromFile( argv[ indexFlag + 1 ] );
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:30:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:33:20
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x2C2C (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BADC in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D952 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( indexFlag < argc - 1) {
+     23: 
+=>   24:             testFromFile( argv[ indexFlag + 1 ] );
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:30:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:33:20
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x1930 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BADC in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D952 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( indexFlag < argc - 1) {
+     23:             printf( "%d", indexFlag );
+=>   24:             testFromFile( argv[ indexFlag + 1 ] );
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:30:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:34:54
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x1930 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BADC in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D952 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( indexFlag < argc - 1) {
+     23:             printf( "%d", indexFlag );
+=>   24:             testFromFile( argv[ indexFlag + 1 ] );
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:30:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:34:54
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x1790 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BAF0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D966 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( indexFlag < argc - 1) {
+     23:             printf( "%d", indexFlag );
+=>   24:             testFromFile( argv[ indexFlag + 1 ] );
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:30:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:35:33
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (11, 0x00): SIGSEGV: Доступ по неверному указателю. Ставьте ассерты! 
+
+Нарушение доступа к памяти.
+
+#1: Исключение EXCEPTION_ACCESS_VIOLATION (0xC0000005) при выполнении кода по адресу 0x77212760 в функции $I10_OUTPUT(). Попытка записать данные по адресу NULL в модуле C:\Windows\System32\msvcrt.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x1790 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x77212760 in C:\Windows\System32\msvcrt.dll: $I10_OUTPUT()
+# 1 0x771FFE50 in C:\Windows\System32\msvcrt.dll: ungetwc()
+# 2 0x771F3C00 in C:\Windows\System32\msvcrt.dll: fscanf_s()
+# 3 0x771F3ADB in C:\Windows\System32\msvcrt.dll: fscanf()
+
+# 4 0x0045BAF0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/test.cpp:105:
+
+    103:             const char* lineCountRoots = "";
+    104:             fscanf( testFile, "%lg %lg %lg %lg %lg %s", &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c,
+=>  105:                     testCase.truResult.x1, testCase.truResult.x2, lineCountRoots );
+    106:             
+    107:             testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+# 5 0x0042D966 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:24:
+
+     22:         if ( indexFlag < argc - 1) {
+     23:             printf( "%d", indexFlag );
+=>   24:             testFromFile( argv[ indexFlag + 1 ] );
+     25:         }
+     26:         return 0;
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 25 2025 17:30:27, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 25 2025 17:35:33
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------

@@ -12,10 +12,22 @@ int inputCoefficient( Coefficients* coefficients );
 
 int main( int argc, char **argv ) {
 
-    if ( flagSearch( argc, argv, "--Test" ) ) {
-        test();
+    int indexFlag = 0;
+
+    if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+
+        testFromFunction();
         return 0;
     }
+    else if ( ( indexFlag = flagSearch( argc, argv, "--file-test" ) ) != 0 ) {
+
+        if ( indexFlag < argc - 1) {
+
+            testFromFile( argv[ indexFlag + 1 ] );
+        }
+        return 0;
+    }
+    // option_ptr - argv < argc
 
     printf("Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
            " на следующей строке через пробел: \n\n");

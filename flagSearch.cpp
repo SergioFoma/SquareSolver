@@ -7,25 +7,18 @@
 
     assert( flag != NULL );
     assert ( argv != NULL );
-    for ( int check = 0; check < argc; check++) {
 
-        assert( argv[ check ] );
-    }
+    for( int indexArgv = 0; indexArgv< argc; indexArgv++ ){
 
-    int resultSearch = 0;
+        assert( argv[ indexArgv ] != NULL);
 
-    if ( argc == 1) return 0;
+        if ( strcmp( argv[ indexArgv ], flag) == 0 ) {
 
-    for( int i = 0; i < argc; i++ ){
-
-        if ( strcmp( argv[ i ], flag) == 0 ) {
-
-            resultSearch = 1;
-            break;
+            return indexArgv;
         }
     }
 
-    return resultSearch;
+    return 0;
 
  }
 

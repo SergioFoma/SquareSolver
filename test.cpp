@@ -1,8 +1,10 @@
+#include <TXLib.h>
 #include "test.h"
 
 #include <math.h>
 #include <stdio.h>
 #include <assert.h>
+#include <string.h>
 
 int testSolve( TestCaseData caseData ) {
 
@@ -36,26 +38,121 @@ void printFail( TestCaseData caseData ) {
 
 }
 
- void test() {
+void testFromFunction() {
 
-    TestCaseData tests[] = { 
+    TestCaseData testData[] = { 
                                 { {2, 4, 2}, {-1, -1, twoSameRoot} }, 
                                 { {1.2, -123.7, 11.1}, {0.0898115, 102.993522, twoRoot} },
                                 { {0, 0, 0}, {NAN, NAN, alotRoot} },
                                 {{0, 1, 0}, {0, 0, oneRoot} },
                                 { {0, 0, 1}, {NAN, NAN, zeroRoot} }
-                            }; 
+                            };
+    
+    size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
 
-    for (size_t testIndex = 0; testIndex < ( sizeof( tests) / sizeof( tests[0] ) ) ; testIndex++ ) {
+    test( testData, testCount );
+}
 
-        if( !testSolve( tests[ testIndex ] ) ) {
+RootsCount getCountRoots( const char* lineCountRoots ) {
 
-            printFail( tests[ testIndex] );
+    if ( strcmp( lineCountRoots, "zeroRoot") == 0 ) {
+
+        return zeroRoot;
+    }
+    else if ( strcmp( lineCountRoots, "twoRoot" ) == 0) {
+
+        return twoRoot;
+    }
+    else if ( strcmp( lineCountRoots, "oneRoot" ) == 0) {
+
+        return oneRoot;
+    }
+    else if ( strcmp( lineCountRoots, "alotRoot" ) == 0) {
+
+        return alotRoot;
+    }
+    else if ( strcmp( lineCountRoots, "twoSameRoot" ) == 0 ) {
+
+        return twoSameRoot;
+    }
+    
+    printf("Ошибка считывания количества корней уравнения");
+
+    return zeroRoot;
+}
+
+void testFromFile( char* testName ) {
+
+    FILE* testFile;
+
+    testFile = fopen( testName, "r");
+
+    const size_t testCount = 5;
+    TestCaseData testData [ testCount ];
+
+    if ( testFile == NULL ) {
+        
+        printf("Ошибка открытия файла.");
+    }
+    else {
+
+        for ( size_t line = 0; line < testCount; line++ ) {
+
+            TestCaseData testCase = {};
+
+            char lineCountRoots[ 1000 ] = "";
+            
+            double* numbers[] = { &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c, 
+                                  &testCase.truResult.x1, &testCase.truResult.x2 };
+            
+            for ( int indexNumbers = 0; indexNumbers < 5; indexNumbers++ ) {
+
+                if ( fscanf( testFile, "%lg", numbers[ indexNumbers ] ) == 1 ) {
+
+                    continue;
+                }
+                else {
+
+                    char trash[ 100 ] = "";
+
+                    fscanf( testFile, "%100s", trash);
+
+                    if ( strncmp( trash, "NAN", 3 ) == 0 ) {
+
+                        *numbers[ indexNumbers ] = NAN;
+                    }
+                }
+
+            }
+
+            fscanf( testFile, "%s", lineCountRoots);
+
+            while ( fgetc( testFile ) != '\n' );
+            
+            testCase.truResult.countRoots = getCountRoots( lineCountRoots );
+
+            testData[ line ] = testCase;
+        }
+    }
+
+    test( testData, testCount );
+
+    fclose( testFile );
+
+}
+
+void test(TestCaseData* testData, const size_t testCount) {
+
+    for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+
+        if( !testSolve( testData[ testIndex ] ) ) {
+
+            printFail( testData[ testIndex] );
         }
         else {
 
             printf("Complited successfully with coefficients %lg %lg %lg\n",
-                    tests[ testIndex ].coeff.a, tests[ testIndex ].coeff.b, tests[ testIndex ].coeff.c );
+                    testData[ testIndex ].coeff.a, testData[ testIndex ].coeff.b, testData[ testIndex ].coeff.c );
         }
     }
 

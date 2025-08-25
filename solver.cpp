@@ -7,6 +7,8 @@
 
 void solveEquation( Coefficients coefficients, SolveResult* answer ) {
 
+    assert( answer ) ;
+
     if ( fabs( coefficients.a ) <= delta ) {
 
         solveLinear( coefficients, answer );

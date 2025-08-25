@@ -1,0 +1,5 @@
+2 4 2 -1 -1 twoSameRoot
+1.2 -123.7 11.1 0.0898115 102.993522 twoRoot
+0 0 0 NAN NAN alotRoot
+0 1 0 0 0 oneRoot
+0 0 1 NAN NAN zeroRoot

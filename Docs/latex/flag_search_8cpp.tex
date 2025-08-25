@@ -1,0 +1,41 @@
+\doxysection{flag\+Search.\+cpp File Reference}
+\hypertarget{flag_search_8cpp}{}\label{flag_search_8cpp}\index{flagSearch.cpp@{flagSearch.cpp}}
+{\ttfamily \#include "{}flag\+Search.\+h"{}}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$assert.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{flag_search_8cpp_ad54fd92d7a83f6211d5aa3b825ba33b4}{flag\+Search}} (int argc, char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv, const char \texorpdfstring{$\ast$}{*}flag)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{flag_search_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{flag_search_8cpp_ad54fd92d7a83f6211d5aa3b825ba33b4}\index{flagSearch.cpp@{flagSearch.cpp}!flagSearch@{flagSearch}}
+\index{flagSearch@{flagSearch}!flagSearch.cpp@{flagSearch.cpp}}
+\doxysubsubsection{\texorpdfstring{flagSearch()}{flagSearch()}}
+{\footnotesize\ttfamily \label{flag_search_8cpp_ad54fd92d7a83f6211d5aa3b825ba33b4} 
+int flag\+Search (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}}]{argv}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{flag}{}\end{DoxyParamCaption})}
+
+\DoxyHorRuler{0}
+
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{in}}  & {\em argc} & argc -\/ количество строчек в консоли. \\
+\hline
+\mbox{\texttt{in}}  & {\em \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv} & \texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*}argv -\/ список из указателей на введенные строки. \\
+\hline
+\mbox{\texttt{in}}  & {\em flag} & flag -\/ строка, содержащая команду для включения тестов.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 если строка была найдена, 0 если строка была не найдена.
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+В введеной строке ищет строку отличную от result.\+exe. Возращает результат поиска.
+\end{DoxyNote}
+\DoxyHorRuler{0}
+ 
