@@ -21,13 +21,14 @@ int main( int argc, char **argv ) {
            " на следующей строке через пробел: \n\n");
 
     Coefficients coefficients = {0, 0, 0};
+    SolveResult answer = { NAN, NAN, zeroRoot};
 
     if (!inputCoefficient( &coefficients) ) {
 
         return 0;
     }
 
-    SolveResult answer = solveEquation( coefficients );
+    solveEquation( coefficients, &answer );
     printResult( coefficients, answer );
 
     return 0;
@@ -93,14 +94,14 @@ int inputCoefficient( Coefficients* coefficients) {
 
     assert( coefficients );
     
-    if ( scanf("%lg %lg %lg", &( (*coefficients).a ), &( (*coefficients).b ), &( (*coefficients).c ) ) < 3 ) {
+    if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
 
         printf("\nОшибка. Введен неверный формат квадратного уравнения.");
         return 0;
     }
 
-    if ( !isfinite( (*coefficients).a ) || !isfinite( (*coefficients).b ) ||
-         !isfinite( (*coefficients).c) ) {
+    if ( !isfinite( coefficients->a ) || !isfinite( coefficients->b ) ||
+         !isfinite( coefficients->c ) ) {
 
         return 0;
     }

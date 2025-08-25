@@ -6,7 +6,8 @@
 
 int testSolve( TestCaseData caseData ) {
 
-    SolveResult actualResult = solveEquation( caseData.coeff );
+    SolveResult actualResult = { NAN, NAN, zeroRoot };
+    solveEquation( caseData.coeff, &actualResult);
 
     if ( isnan( caseData.truResult.x1 ) && isnan( caseData.truResult.x2) && isnan( actualResult.x1) &&
          isnan( actualResult.x2 ) ) {
@@ -25,7 +26,8 @@ int testSolve( TestCaseData caseData ) {
 
 void printFail( TestCaseData caseData ) {
 
-    SolveResult actualResult = solveEquation( caseData.coeff );
+    SolveResult actualResult = { NAN, NAN, zeroRoot };
+    solveEquation( caseData.coeff, &actualResult );
 
     printf("\n\nFALED: solveEquation( %lg %lg %lg ) -> x1 = %lg, x2 = %lg, countRoots = %d"
            " should be( x1 = %lg, x2 = %lg, countRoots = %d)", caseData.coeff.a, caseData.coeff.b, caseData.coeff.c,
