@@ -112,7 +112,7 @@ void readNumbersFromFile( FILE* testFile, TestCaseData* testCase ) {
 
 void clearBufferFunction( FILE* testFile ) {
 
-    while ( fgetc( testFile ) != '\n' );
+    while ( fgetc( testFile ) != '\n' && fgetc( testFile ) != EOF );
 }
 
 int testFromFile( char* testName ) {
