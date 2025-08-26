@@ -32,7 +32,8 @@ int main( int argc, char **argv ) {
         return 0;
     }
 
-    printf("Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
+    printf("МЯУ\n\n"
+           "Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
            " на следующей строке через пробел: \n\n");
 
     Coefficients coefficients = {0, 0, 0};
@@ -46,6 +47,8 @@ int main( int argc, char **argv ) {
     solveEquation( coefficients, &answer );
     printResult( coefficients, answer );
 
+    printf("\n\nCOMMIT GITHUB\n");
+    
     return 0;
 }
 
@@ -98,7 +101,7 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 
 //-----------------------------------------------------------------------------------------------------
 //!
-//! @param [in] *coefficients   *coefficients - указатель на структура, получающую коэффициенты.
+//! @param [in] *coefficients   *coefficients - указатель на структуру, получающую коэффициенты.
 //!
 //! @result 1 при успешном считывании, 0 при безуспешном.
 //!
