@@ -84,6 +84,34 @@ RootsCount getCountRoots( const char* lineCountRoots ) {
     return zeroRoot;
 }
 
+void getFromFile( FILE* testFile, TestCaseData* testCase ) {
+
+    double* numbers[] = { &( (testCase->coeff).a ), &( (testCase->coeff).b ) , &( (testCase->coeff).c ), 
+                         &( (testCase->truResult).x1 ) , &( (testCase->truResult).x2 )  };
+            
+    for ( int indexNumbers = 0; indexNumbers < 5; indexNumbers++ ) {
+
+        if ( fscanf( testFile, "%lg", numbers[ indexNumbers ]  ) == 1 ) {
+
+            continue;
+        }
+        else {
+
+            char trash[ 100 ] = "";
+
+            fscanf( testFile, "%100s", trash);
+
+            if ( strncmp( trash, "NAN", 3 ) == 0 ) {
+
+                *numbers[ indexNumbers ] = NAN;
+            }
+        }
+
+    }
+
+    (testCase->truResult).countRoots = zeroRoot;
+
+}
 void testFromFile( char* testName ) {
 
     assert( testName != NULL );
@@ -92,7 +120,7 @@ void testFromFile( char* testName ) {
 
     testFile = fopen( testName, "r");
 
-    const size_t testCount = 5;
+    const size_t testCount = 6;
     TestCaseData testData [ testCount ];
 
     if ( testFile == NULL ) {
@@ -107,7 +135,8 @@ void testFromFile( char* testName ) {
 
             char lineCountRoots[ 1000 ] = "";
             
-            double* numbers[] = { &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c, 
+            getFromFile( testFile, &testCase );
+            /*double* numbers[] = { &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c, 
                                   &testCase.truResult.x1, &testCase.truResult.x2 };
             
             for ( int indexNumbers = 0; indexNumbers < 5; indexNumbers++ ) {
@@ -128,7 +157,7 @@ void testFromFile( char* testName ) {
                     }
                 }
 
-            }
+            }*/
 
             fscanf( testFile, "%s", lineCountRoots);
 
