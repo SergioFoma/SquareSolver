@@ -13,7 +13,7 @@
 //!--------------------------------------------------------------------------------------------------------------------- 
 struct TestCaseData {
     struct Coefficients coeff;
-    struct SolveResult truResult;
+    struct SolveResult trueResult;
 };
 
 //--------------------------------------------------------------------------------------------------------------
@@ -23,9 +23,11 @@ struct TestCaseData {
 //! @note Переводит строку, содержащую информацию о количестве корней, в тип RootsCount.
 //!
 //--------------------------------------------------------------------------------------------------------------
-RootsCount getCountRoots( const char* lineCountRoots );
+RootsCount getRootsCountFromFile( const char* lineCountRoots );
 
-void getFromFile( FILE* testFile, TestCaseData* testCase );
+void clearBufferFunction( FILE* testFile );
+
+void readNumbersFromFile( FILE* testFile, TestCaseData* testCase );
 //--------------------------------------------------------------------------------------------------------------
 //!
 //! @note Содержит массив из структур типа TestCaseData. Вызывает функцию test с параметром в виде этого массива.
@@ -39,7 +41,7 @@ void testFromFunction();
 //!       Вызывает функцию test с параметром в виде этого массива.
 //!
 //-------------------------------------------------------------------------------------------
-void testFromFile(char* testName);
+int testFromFile(char* testName);
 
 //---------------------------------------------------------------------------------------
 //!
@@ -47,7 +49,7 @@ void testFromFile(char* testName);
 //! Если обнаружено несовпадение - печатает о некорректности вычислений.
 //!
 //---------------------------------------------------------------------------------------
-void test( TestCaseData* testData, const size_t testCount );
+void runTestFromArray( const TestCaseData* testData, const size_t testCount );
 
 //---------------------------------------------------------------------------------------------------------------------
 //!

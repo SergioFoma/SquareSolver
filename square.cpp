@@ -48,7 +48,7 @@ int main( int argc, char **argv ) {
     printResult( coefficients, answer );
 
     printf("\n\nCOMMIT GITHUB\n");
-    
+
     return 0;
 }
 

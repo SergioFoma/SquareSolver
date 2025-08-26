@@ -25,7 +25,7 @@ void solveSquare( Coefficients coefficients, SolveResult* answer ) {
 
     double D = coefficients.b * coefficients.b - 4 * coefficients.a * coefficients.c;
 
-    if ( D < -delta ) {
+    if ( D < 0 ) {
 
         ( answer-> countRoots ) = zeroRoot;
     }

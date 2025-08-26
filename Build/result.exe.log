@@ -430,3 +430,115 @@ Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
 Directory:	C:\Users\User\Documents\SquareSolver
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7605B6D2 в функции RaiseException() в модуле C:\Windows\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x1CC0 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7605B6D2 in C:\Windows\System32\KERNELBASE.dll: RaiseException()
+# 1 0x77222075 in C:\Windows\System32\msvcrt.dll: modf()
+# 2 0x77221E40 in C:\Windows\System32\msvcrt.dll: modf()
+# 3 0x77224688 in C:\Windows\System32\msvcrt.dll: modf()
+# 4 0x7721ECE0 in C:\Windows\System32\msvcrt.dll: modf()
+# 5 0x77213EB8 in C:\Windows\System32\msvcrt.dll: sqrt()
+
+# 6 0x0042F041 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/solver.cpp:18:
+
+     16:     else {
+     17: 
+=>   18:         solveSquare( coefficients, answer );
+     19:     }
+     20: }
+
+# 7 0x0042DA07 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:47:
+
+     45:     }
+     46: 
+=>   47:     solveEquation( coefficients, &answer );
+     48:     printResult( coefficients, answer );
+     49: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 26 2025 14:35:17, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 26 2025 14:35:43
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Недопустимая операция с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_INVALID_OPERATION (0xC0000090) при выполнении кода по адресу 0x7605B6D2 в функции RaiseException() в модуле C:\Windows\System32\KERNELBASE.dll. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x1CC0 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x7605B6D2 in C:\Windows\System32\KERNELBASE.dll: RaiseException()
+# 1 0x77222075 in C:\Windows\System32\msvcrt.dll: modf()
+# 2 0x77221E40 in C:\Windows\System32\msvcrt.dll: modf()
+# 3 0x77224688 in C:\Windows\System32\msvcrt.dll: modf()
+# 4 0x7721ECE0 in C:\Windows\System32\msvcrt.dll: modf()
+# 5 0x77213EB8 in C:\Windows\System32\msvcrt.dll: sqrt()
+
+# 6 0x0042F041 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/solver.cpp:18:
+
+     16:     else {
+     17: 
+=>   18:         solveSquare( coefficients, answer );
+     19:     }
+     20: }
+
+# 7 0x0042DA07 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/square.cpp:47:
+
+     45:     }
+     46: 
+=>   47:     solveEquation( coefficients, &answer );
+     48:     printResult( coefficients, answer );
+     49: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 26 2025 14:35:17, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 26 2025 14:35:43
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------

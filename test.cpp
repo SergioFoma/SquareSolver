@@ -6,21 +6,23 @@
 #include <stdio.h>
 #include <assert.h>
 #include <string.h>
+#include <stdlib.h>
+#include <malloc.h>
 
 int testSolve( TestCaseData caseData ) {
 
     SolveResult actualResult = { NAN, NAN, zeroRoot };
     solveEquation( caseData.coeff, &actualResult);
 
-    if ( isnan( caseData.truResult.x1 ) && isnan( caseData.truResult.x2) && isnan( actualResult.x1) &&
+    if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
          isnan( actualResult.x2 ) ) {
 
         return 1;
     }
-    else if ( fabs( caseData.truResult.x1 - actualResult.x1 ) <= delta &&
-              fabs( caseData.truResult.x2 - actualResult.x2) <= delta &&
-              caseData.truResult.countRoots == actualResult.countRoots ) {
-                
+    else if ( fabs( caseData.trueResult.x1 - actualResult.x1 ) <= delta &&
+              fabs( caseData.trueResult.x2 - actualResult.x2) <= delta &&
+              caseData.trueResult.countRoots == actualResult.countRoots ) {
+
         return 1;
     }
 
@@ -35,7 +37,7 @@ void printFail( TestCaseData caseData ) {
     printf("\n\nFALED: solveEquation( %lg %lg %lg ) -> x1 = %lg, x2 = %lg, countRoots = %d"
            " should be( x1 = %lg, x2 = %lg, countRoots = %d)", caseData.coeff.a, caseData.coeff.b, caseData.coeff.c,
             actualResult.x1, actualResult.x2, actualResult.countRoots,
-           caseData.truResult.x1, caseData.truResult.x2, caseData.truResult.countRoots );
+           caseData.trueResult.x1, caseData.trueResult.x2, caseData.trueResult.countRoots );
 
 }
 
@@ -51,54 +53,51 @@ void testFromFunction() {
     
     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
 
-    test( testData, testCount );
+    runTestFromArray( testData, testCount );
 }
 
-RootsCount getCountRoots( const char* lineCountRoots ) {
+RootsCount getRootsCountFromFile( const char* lineCountRoots ) {
 
     assert( lineCountRoots != NULL );
 
     if ( strcmp( lineCountRoots, "zeroRoot") == 0 ) {
-
         return zeroRoot;
     }
     else if ( strcmp( lineCountRoots, "twoRoot" ) == 0) {
-
         return twoRoot;
     }
     else if ( strcmp( lineCountRoots, "oneRoot" ) == 0) {
-
         return oneRoot;
     }
     else if ( strcmp( lineCountRoots, "alotRoot" ) == 0) {
-
         return alotRoot;
     }
     else if ( strcmp( lineCountRoots, "twoSameRoot" ) == 0 ) {
-
         return twoSameRoot;
     }
     
     printf("Ошибка считывания количества корней уравнения");
-
     return zeroRoot;
 }
 
-void getFromFile( FILE* testFile, TestCaseData* testCase ) {
+void readNumbersFromFile( FILE* testFile, TestCaseData* testCase ) {
 
     double* numbers[] = { &( (testCase->coeff).a ), &( (testCase->coeff).b ) , &( (testCase->coeff).c ), 
-                         &( (testCase->truResult).x1 ) , &( (testCase->truResult).x2 )  };
-            
-    for ( int indexNumbers = 0; indexNumbers < 5; indexNumbers++ ) {
+                         &( (testCase->trueResult).x1 ) , &( (testCase->trueResult).x2 )  };
+    
+    size_t sizeNumbers = 5;
+    size_t maxLineTrash = 100;
+    char* trash = ( char* )calloc( maxLineTrash, sizeof( char ) );
+
+    for ( size_t indexNumbers = 0; indexNumbers < sizeNumbers ; indexNumbers++ ) {
 
         if ( fscanf( testFile, "%lg", numbers[ indexNumbers ]  ) == 1 ) {
-
             continue;
         }
         else {
 
-            char trash[ 100 ] = "";
-
+            // На Windows нельзя считать в fscanf строчку NAN как duuble, поэтому считываю как строчку,
+            // чтобы перевести переменную типа double в NAN в ручную.
             fscanf( testFile, "%100s", trash);
 
             if ( strncmp( trash, "NAN", 3 ) == 0 ) {
@@ -106,83 +105,78 @@ void getFromFile( FILE* testFile, TestCaseData* testCase ) {
                 *numbers[ indexNumbers ] = NAN;
             }
         }
-
     }
 
-    (testCase->truResult).countRoots = zeroRoot;
-
+    free( trash );
 }
-void testFromFile( char* testName ) {
+
+void clearBufferFunction( FILE* testFile ) {
+
+    while ( fgetc( testFile ) != '\n' );
+}
+
+int testFromFile( char* testName ) {
 
     assert( testName != NULL );
 
-    FILE* testFile;
+    FILE* testFile = NULL;
 
     testFile = fopen( testName, "r");
-
-    const size_t testCount = 6;
-    TestCaseData testData [ testCount ];
 
     if ( testFile == NULL ) {
         
         printf("Ошибка открытия файла.");
-    }
-    else {
-
-        for ( size_t line = 0; line < testCount; line++ ) {
-
-            TestCaseData testCase = {};
-
-            char lineCountRoots[ 1000 ] = "";
-            
-            getFromFile( testFile, &testCase );
-            /*double* numbers[] = { &testCase.coeff.a, &testCase.coeff.b, &testCase.coeff.c, 
-                                  &testCase.truResult.x1, &testCase.truResult.x2 };
-            
-            for ( int indexNumbers = 0; indexNumbers < 5; indexNumbers++ ) {
-
-                if ( fscanf( testFile, "%lg", numbers[ indexNumbers ] ) == 1 ) {
-
-                    continue;
-                }
-                else {
-
-                    char trash[ 100 ] = "";
-
-                    fscanf( testFile, "%100s", trash);
-
-                    if ( strncmp( trash, "NAN", 3 ) == 0 ) {
-
-                        *numbers[ indexNumbers ] = NAN;
-                    }
-                }
-
-            }*/
-
-            fscanf( testFile, "%s", lineCountRoots);
-
-            while ( fgetc( testFile ) != '\n' );
-            
-            testCase.truResult.countRoots = getCountRoots( lineCountRoots );
-
-            testData[ line ] = testCase;
-        }
+        return 0;
     }
 
-    test( testData, testCount );
+    size_t testCount = 0;
+    size_t maxLineCountRoots = 100;
+
+    fscanf( testFile, "%u", &testCount );
+    clearBufferFunction( testFile );
+
+    TestCaseData* testData = ( TestCaseData* )calloc( testCount,  sizeof( TestCaseData ) );
+
+    if ( testData == NULL ) {
+
+        printf("Память переполнена");
+        return 0;
+    }
+
+    char* lineCountRoots = ( char* )calloc( maxLineCountRoots , sizeof( char ) );
+
+    if( lineCountRoots == NULL ) {
+        
+        printf("Память переполнена");
+        return 0;
+    }
+
+    for ( size_t line = 0; line < testCount; line++ ) {
+        
+        readNumbersFromFile( testFile, &( testData[ line ] ) );
+
+        fscanf( testFile, "%s", lineCountRoots);
+        clearBufferFunction( testFile );
+        
+        testData[line].trueResult.countRoots = getRootsCountFromFile( lineCountRoots );
+    }
+
+    runTestFromArray( testData, testCount );
+
+    free( lineCountRoots );
+    free( testData );
 
     fclose( testFile );
-
+    return 1;
 }
 
-void test(TestCaseData* testData, const size_t testCount) {
+void runTestFromArray(const TestCaseData* testData, const size_t testCount) { // TODO const size_t ----> const not needed
 
     assert( testData != NULL );
 
     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
 
         if( !testSolve( testData[ testIndex ] ) ) {
-
             printFail( testData[ testIndex] );
         }
         else {
