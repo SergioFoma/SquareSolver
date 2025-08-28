@@ -13,10 +13,10 @@
 //-----------------------------------------------------------------------------------------------------
 enum RootsCount {
 
-    zeroRoot = 0,
-    twoRoot = 1,
-    oneRoot = 2,
-    alotRoot = 3,
+    zeroRoot    = 0,
+    twoRoot     = 1,
+    oneRoot     = 2,
+    alotRoot    = 3,
     twoSameRoot = 4
 
 };

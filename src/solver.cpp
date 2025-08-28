@@ -1,4 +1,6 @@
 #include "solver.h"
+#include "myAssert.h"
+#include "mathComparison.h"
 
 #include <ctype.h>
 #include <math.h>
@@ -6,7 +8,9 @@
 
 void solveEquation( Coefficients coefficients, SolveResult* answer ) {
 
-    if ( fabs( coefficients.a ) <= delta ) {
+    myAssert( answer != NULL, (void)0 )
+
+    if ( mathComparison( coefficients.a, 0.0 ) )  {
         solveLinear( coefficients, answer );
     }
     else {
@@ -15,6 +19,8 @@ void solveEquation( Coefficients coefficients, SolveResult* answer ) {
 }
 
 void solveSquare( Coefficients coefficients, SolveResult* answer ) {
+
+    myAssert( answer != NULL , (void)0 )
 
     double D = coefficients.b * coefficients.b - 4 * coefficients.a * coefficients.c;
 
@@ -27,16 +33,18 @@ void solveSquare( Coefficients coefficients, SolveResult* answer ) {
 
         ( answer->x1) = firstPart - secondPart;
         ( answer->x2) = firstPart + secondPart;
-        ( answer->countRoots) = ( fabs( answer->x1 - answer->x2) < delta ) ? twoSameRoot: twoRoot;
+        ( answer->countRoots) = ( mathComparison(answer->x1, answer->x2) ) ? twoSameRoot: twoRoot;
     }
 }
 
 void solveLinear( Coefficients coefficients, SolveResult* answer ) {
 
-    if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) <= delta ) {
+    myAssert( answer != NULL, (void)0 )
+
+    if( mathComparison( coefficients.b, 0 ) && mathComparison( coefficients.c, 0) ) {
         ( answer->countRoots ) = alotRoot;
     }
-    else if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) >= delta ){
+    else if( mathComparison( coefficients.b, 0 ) && !mathComparison( coefficients.c, 0 ) ){
         ( answer->countRoots) = zeroRoot;
     }
     else {

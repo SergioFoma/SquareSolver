@@ -542,3 +542,927 @@ Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
 Directory:	C:\Users\User\Documents\SquareSolver
 
 --------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x9D4 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:16:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:17:05
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x9D4 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:16:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:17:05
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x3BB0 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:16:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:18:17
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x3BB0 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:16:33, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:18:16
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0xB1C (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:19:39, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:19:58
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0xB1C (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:19:39, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:19:58
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x46A8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045BDEE in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:164:
+
+    162:     }
+    163: 
+=>  164:     runTestFromArray( testData, testCount );
+    165: 
+    166:     free( lineCountRoots );
+
+# 5 0x0042D95A in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:25:
+
+     23:     else if ( ( indexFlag = flagSearch( argc, argv, "--file-test" ) ) != 0 ) {
+     24:         if ( indexFlag < argc - 1) {
+=>   25:             testFromFile( argv[ indexFlag + 1 ] );
+     26:         }
+     27:         else {
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:24:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:25:34
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x46A8 (Main). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045BDEE in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFile() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:164:
+
+    162:     }
+    163: 
+=>  164:     runTestFromArray( testData, testCount );
+    165: 
+    166:     free( lineCountRoots );
+
+# 5 0x0042D95A in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:25:
+
+     23:     else if ( ( indexFlag = flagSearch( argc, argv, "--file-test" ) ) != 0 ) {
+     24:         if ( indexFlag < argc - 1) {
+=>   25:             testFromFile( argv[ indexFlag + 1 ] );
+     26:         }
+     27:         else {
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:24:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:25:34
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0xA00 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0.0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:33:41, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:33:56
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0xA00 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0.0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0045B7B0 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testSolve() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:16:
+
+     14: 
+     15:     SolveResult actualResult = { NAN, NAN, zeroRoot };
+=>   16:     solveEquation( caseData.coeff, &actualResult);
+     17: 
+     18:     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
+
+# 3 0x0045BECF in C:\Users\User\Documents\SquareSolver\Build\result.exe: runTestFromArray() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:179:
+
+    177:     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
+    178: 
+=>  179:         if( !testSolve( testData[ testIndex ] ) ) {
+    180:             printFail( testData[ testIndex] );
+    181:         }
+
+# 4 0x0045B9A3 in C:\Users\User\Documents\SquareSolver\Build\result.exe: testFromFunction() at C:/Users/User/Documents/SquareSolver/./src/test.cpp:54:
+
+     52:     size_t testCount = sizeof( testData ) / sizeof( testData[ 0 ] );
+     53: 
+=>   54:     runTestFromArray( testData, testCount );
+     55: }
+     56: 
+
+# 5 0x0042D8FD in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:20:
+
+     18: 
+     19:     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
+=>   20:         testFromFunction();
+     21:         return 0;
+     22:     }
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:33:41, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:33:57
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib предупреждает:
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+#1: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x18B0 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0.0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0042DA07 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:44:
+
+     42:     }
+     43: 
+=>   44:     solveEquation( coefficients, &answer );
+     45:     printResult( coefficients, answer );
+     46: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:38:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:38:46
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------
+
+--------------------------------------------------
+TXLib соболезнует...
+
+Программа: C:\Users\User\Documents\SquareSolver\Build\result.exe,
+
+ВНЕЗАПНО: signal (8, 0x00): SIGFPE: Грубая ошибка в вычислениях. 
+
+Деление на ноль при операции с плавающей точкой.
+
+#1: Исключение EXCEPTION_FLT_DIVIDE_BY_ZERO (0xC000008E) при выполнении кода по адресу 0x0042F212 в функции solveLinear() в файле C:/Users/User/Documents/SquareSolver/./src/solver.cpp на строке 51 в модуле C:\Users\User\Documents\SquareSolver\Build\result.exe. Спасибо _txVectoredExceptionHandler(), что сообщил. Люблю его <3
+
+С помощью функции signal() вы можете сами обработать эту ошибку.
+
+#2: TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400], Instance: 0x0057C65C (32-bit), Flags: Cmdre0, Thread: 0x18B0 (Main), GetLastError(): 126 (РќРµ РЅР°Р№РґРµРЅ СѓРєР°Р·Р°РЅРЅС‹Р№ РјРѕРґСѓР»СЊ). 
+
+--------------------------------------------------
+Стек вызовов:
+
+# 0 0x0042F212 in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveLinear() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:51:
+
+     49:     }
+     50:     else {
+=>   51:         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
+     52:         ( answer->countRoots ) = oneRoot;
+     53:     }
+
+# 1 0x0042EFEC in C:\Users\User\Documents\SquareSolver\Build\result.exe: solveEquation() at C:/Users/User/Documents/SquareSolver/./src/solver.cpp:14:
+
+     12: 
+     13:     if ( mathComparison( coefficients.a, 0.0 ) )  {
+=>   14:         solveLinear( coefficients, answer );
+     15:     }
+     16:     else {
+
+# 2 0x0042DA07 in C:\Users\User\Documents\SquareSolver\Build\result.exe: main() at C:/Users/User/Documents/SquareSolver/./src/square.cpp:44:
+
+     42:     }
+     43: 
+=>   44:     solveEquation( coefficients, &answer );
+     45:     printResult( coefficients, answer );
+     46: 
+
+--------------------------------------------------
+Developed with:
+
+The Dumb Artist Library (TX Library)
+TXLib [Ver: 00173a, Rev: 174, Date: 2025-08-03 17:59:06 +0400]
+Copyright (C) Ded (Ilya Dedinsky, http://txlib.ru) <mail@txlib.ru>
+See license on: http://txlib.ru
+
+TXLib file:	c:\users\user\documents\codeblocks\mingw\include\txlib.h
+Compiled:	Aug 28 2025 17:38:30, GNU g++ 4.8.1, std=201103L, MinGW Runtime 3.20, 32-bit, DEBUG
+Started:	Aug 28 2025 17:38:45
+
+Run file:	C:\Users\User\Documents\SquareSolver\Build\result.exe
+Directory:	C:\Users\User\Documents\SquareSolver
+
+--------------------------------------------------

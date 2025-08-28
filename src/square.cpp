@@ -1,37 +1,29 @@
 #include <TXLib.h>
-#include <stdio.h>
-#include <math.h>
-
 #include "solver.h"
 #include "test.h"
 #include "flagSearch.h"
 #include "myAssert.h"
 
+#include <stdio.h>
+#include <math.h>
+
+
 void printResult( Coefficients coefficients, SolveResult answer );
 
 int inputCoefficient( Coefficients* coefficients );
 
-int main( int argc, char **argv ) {
+int main( int argc, char** argv ) {
 
-    int indexFlag = 0;
-
-    if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
-        testFromFunction();
+    if ( checkOnFlag( argc, argv, "--Test") ) {
         return 0;
     }
-    else if ( ( indexFlag = flagSearch( argc, argv, "--file-test" ) ) != 0 ) {
-        if ( indexFlag < argc - 1) {
-            testFromFile( argv[ indexFlag + 1 ] );
-        }
-        else {
-            printf( "Не введено имя тестирующего файла." );
-        }
+    else if( checkOnFlag( argc, argv, "--file-test" ) ) {
         return 0;
     }
 
-    printf("МЯУ\n\n"
-           "Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
-           " на следующей строке через пробел: \n\n");
+    printf("\033[35;40mМЯУ\n\n\033[0m"
+           "\033[33;40mВведите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
+           " на следующей строке через пробел:\n\n\033[0m");
 
     Coefficients coefficients = {0, 0, 0};
     SolveResult answer = { NAN, NAN, zeroRoot};
@@ -58,32 +50,32 @@ int main( int argc, char **argv ) {
 //-----------------------------------------------------------------------------------------------------
 void printResult( Coefficients coefficients, SolveResult answer ) {
 
-    printf("\na: %lg b: %lg c: %lg\n", coefficients.a, coefficients.b, coefficients.c );
+    printf("\n\033[34;40ma: %lg b: %lg c: %lg\n\033[0m", coefficients.a, coefficients.b, coefficients.c );
 
     switch ( answer.countRoots ) {
         case zeroRoot:
-            printf("\nНет корней.");
+            printf("\n\033[32;40mНет корней.\033[0m");
             break;
 
         case twoRoot:
-            printf("\nУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg",
+            printf("\n\033[32;40mУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg\033[0m",
             answer.x1, answer.x2 );
             break;
 
         case oneRoot:
-            printf("\nУравнение линейное.\nКорень уравнения: %lg", answer.x1 );
+            printf("\n\033[32;40mУравнение линейное.\nКорень уравнения: %lg\033[0m", answer.x1 );
             break;
 
         case alotRoot:
-            printf("\nУравнение имеет бесконечное количество корней.");
+            printf("\n\033[32;40mУравнение имеет бесконечное количество корней.\033[0m");
             break;
 
         case twoSameRoot:
-            printf("\nУравнение квадратное.\nИмеет единственный корень: %lg", answer.x1 );
+            printf("\n\033[32;40mУравнение квадратное.\nИмеет единственный корень: %lg\033[0m", answer.x1 );
             break;
 
         default:
-            printf("\nОшибка. Не определено количество корней.");
+            printf("\n\033[31;40mОшибка. Не определено количество корней.\033[0m");
             break;
     }
 }
@@ -92,17 +84,17 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 //!
 //! @param [in] *coefficients   *coefficients - указатель на структуру, получающую коэффициенты.
 //!
-//! @result 1 при успешном считывании, 0 при безуспешном.
+//! @return 1 при успешном считывании, 0 при безуспешном.
 //!
 //! @note Считывает коэффициенты с ввода пользователя в coefficients.
 //!
 //-----------------------------------------------------------------------------------------------------
 int inputCoefficient( Coefficients* coefficients) {
 
-    myAssert( coefficients != NULL, 0 );
+    myAssert( coefficients != NULL, 0 )
 
     if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
-        printf("\nОшибка. Введен неверный формат квадратного уравнения.");
+        printf("\n\033[31;40mОшибка. Введен неверный формат квадратного уравнения.\033[0m");
         return 0;
     }
 

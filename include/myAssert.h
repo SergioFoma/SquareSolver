@@ -1,32 +1,34 @@
-#undef myAssert // отмена объявления макроса.
-#undef myAssert_
 
-#ifdef NDEBUG // если не дебажная сборка
+#ifdef NDEBUG
 #define myAssert( arguments, value ) ( (void)0 )
 #else
+//-------------------------------------------------------------------------------------------------------------
+//!
+//! @param[in] *funs    *funs - константная строка, являющаяся названием функции, в которой был вызван myAssert.
+//! @param[in] *file    *file - константная строка, являющаяся названием файла, в котором был вызван myAssert.
+//! @param[in] line     line - число, являющееся эквивалентом строки, в которой был вызван myAssert.
+//! @param[in] *expr    *expr - выражение, которое проверялось на корректность.
+//!
+//! @note Выводит сообщение об ошибке.
+//!
+//--------------------------------------------------------------------------------------------------------------
 void myAssert_( const char* func, const char* file, int line, const char *expr );
 
-#define myAssert( arguments, value )\
-    if ( ! (arguments) ) {\
-        ( myAssert_(__func__, __FILE__, __LINE__, #arguments) );\
-        return value;\
-    }\
-    else {\
-        ( void )0;\
-    }
+//------------------------------------------------------------------------------------------------------
+//! @param[in] arguments    arguments - выражение, которое проверяется на корректность.
+//! @param[in] value    value - значение, которое должен вернуть макрос myAssert, в случае не выполнения
+//! выражения arguments.
+//!
+//! @return value.
+//!
+//-------------------------------------------------------------------------------------------------------   
+#define myAssert( arguments, value )                                    \
+    do {                                                                \
+        if ( ! (arguments) ) {                                          \
+            ( myAssert_(__func__, __FILE__, __LINE__, #arguments) );    \
+            return value;                                               \
+        }                                                               \
+    } while(false);
 
 #endif
 
-// # превращает в строку: printf("Value of %s is %d", #value, value);
-
-/*
-
-А еще параметр можно приклеить к чему-то еще, чтобы получился новый идентификатор.
-Для этого между параметром и тем, с чем мы его склеиваем, нужно поставить '##':
-
-#define PRINT_VALUE (number) printf("%d", value_##number);
-int value_one = 10, value_two = 20;
-PRINT_VALUE(one)  // -> 10
-PRINT_VALUE(two)  // -> 20
-
-*/

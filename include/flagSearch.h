@@ -1,17 +1,18 @@
 #ifndef H_FLAGSEARCH
 #define H_FLAGSEARCH
 
+int checkOnFlag( int argc, char** argv,const char* flag );
  //!--------------------------------------------------------------------------------------
  //!
  //! @param [in] argc   argc - количество строчек в консоли.
  //! @param [in] **argv    **argv - список из указателей на введенные строки.
  //! @param [in] flag   flag - строка, содержащая команду для включения тестов.
  //!
- //! @result 1 если строка была найдена, 0 если строка была не найдена.
+ //! @return 1 если строка была найдена, 0 если строка не была найдена.
  //!
  //! @note В введеной строке ищет строку отличную от result.exe. Возращает результат поиска.
  //!
  //!----------------------------------------------------------------------------------------
-int flagSearch( int argc, char **argv, const char* flag);
+int flagSearch( int argc, char** argv, const char* flag);
 
 #endif
