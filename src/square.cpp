@@ -15,18 +15,14 @@ int main( int argc, char **argv ) {
     int indexFlag = 0;
 
     if ( ( indexFlag = flagSearch( argc, argv, "--Test" ) ) != 0  ) {
-
         testFromFunction();
         return 0;
     }
     else if ( ( indexFlag = flagSearch( argc, argv, "--file-test" ) ) != 0 ) {
-
         if ( indexFlag < argc - 1) {
-
             testFromFile( argv[ indexFlag + 1 ] );
         }
         else {
-
             printf( "Не введено имя тестирующего файла." );
         }
         return 0;
@@ -40,7 +36,6 @@ int main( int argc, char **argv ) {
     SolveResult answer = { NAN, NAN, zeroRoot};
 
     if (!inputCoefficient( &coefficients) ) {
-
         return 0;
     }
 
@@ -65,35 +60,28 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
     printf("\na: %lg b: %lg c: %lg\n", coefficients.a, coefficients.b, coefficients.c );
 
     switch ( answer.countRoots ) {
-
         case zeroRoot:
-
             printf("\nНет корней.");
             break;
 
         case twoRoot:
-
             printf("\nУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg",
             answer.x1, answer.x2 );
             break;
 
         case oneRoot:
-
             printf("\nУравнение линейное.\nКорень уравнения: %lg", answer.x1 );
             break;
 
         case alotRoot:
-
             printf("\nУравнение имеет бесконечное количество корней.");
             break;
 
         case twoSameRoot:
-
             printf("\nУравнение квадратное.\nИмеет единственный корень: %lg", answer.x1 );
             break;
 
         default:
-
             printf("\nОшибка. Не определено количество корней.");
             break;
     }
@@ -110,21 +98,17 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 //-----------------------------------------------------------------------------------------------------
 int inputCoefficient( Coefficients* coefficients) {
 
-    assert( coefficients );
-    
-    if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
+    assert( coefficients != NULL );
 
+    if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
         printf("\nОшибка. Введен неверный формат квадратного уравнения.");
         return 0;
     }
 
-    if ( !isfinite( coefficients->a ) || !isfinite( coefficients->b ) ||
-         !isfinite( coefficients->c ) ) {
-
+    if ( isfinite( coefficients->a ) == 0 || isfinite( coefficients->b ) == 0 ||
+         isfinite( coefficients->c ) == 0 ) {
         return 0;
     }
 
-
     return 1;
-
 }

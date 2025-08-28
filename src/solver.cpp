@@ -7,21 +7,19 @@
 
 void solveEquation( Coefficients coefficients, SolveResult* answer ) {
 
-    assert( answer ) ;
+    assert( answer != NULL );
 
     if ( fabs( coefficients.a ) <= delta ) {
-
         solveLinear( coefficients, answer );
     }
     else {
-
         solveSquare( coefficients, answer );
     }
 }
 
 void solveSquare( Coefficients coefficients, SolveResult* answer ) {
 
-    assert( answer );
+    assert( answer != NULL );
 
     double D = coefficients.b * coefficients.b - 4 * coefficients.a * coefficients.c;
 
@@ -43,7 +41,7 @@ void solveSquare( Coefficients coefficients, SolveResult* answer ) {
 
 void solveLinear( Coefficients coefficients, SolveResult* answer ) {
 
-    assert( answer );
+    assert( answer != NULL );
 
     if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) <= delta ) {
 

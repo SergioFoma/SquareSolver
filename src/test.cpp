@@ -16,16 +16,13 @@ int testSolve( TestCaseData caseData ) {
 
     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
          isnan( actualResult.x2 ) ) {
-
         return 1;
     }
     else if ( fabs( caseData.trueResult.x1 - actualResult.x1 ) <= delta &&
               fabs( caseData.trueResult.x2 - actualResult.x2) <= delta &&
               caseData.trueResult.countRoots == actualResult.countRoots ) {
-
         return 1;
     }
-
     return 0;
 }
 
@@ -81,6 +78,9 @@ RootsCount getRootsCountFromFile( const char* lineCountRoots ) {
 }
 
 void readNumbersFromFile( FILE* testFile, TestCaseData* testCase ) {
+
+    assert( testCase != NULL );
+    assert( testCase != NULL );
 
     double* numbers[] = { &( (testCase->coeff).a ), &( (testCase->coeff).b ) , &( (testCase->coeff).c ), 
                          &( (testCase->trueResult).x1 ) , &( (testCase->trueResult).x2 )  };

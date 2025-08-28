@@ -1,4 +1,5 @@
  #include "flagSearch.h"
+ #include "myAssert.h"
 
  #include <string.h>
  #include <assert.h>

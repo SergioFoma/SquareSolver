@@ -10,7 +10,7 @@ FLAGS = -Wshadow -Winit-self -Wredundant-decls -Wcast-align \
 	-Wempty-body -Wformat-security -Wformat=2 -Wignored-qualifiers -Wlogical-op -Wno-missing-field-initializers -Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing -Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -Werror=vla -D_DEBUG -D_EJUDGE_CLIENT_SIDE
 EXE_NAME = $(BUILD_DIR)/result.exe
 
-SOURCES = square.cpp solver.cpp test.cpp flagSearch.cpp
+SOURCES = square.cpp solver.cpp test.cpp flagSearch.cpp myAssert.cpp
 OBJECTS= $(SOURCES:.cpp=.obj) # square.obj
 
 OBJECTS_IN_SOURCE = $(addprefix src/, $(OBJECTS))
