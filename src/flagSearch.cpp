@@ -2,16 +2,15 @@
  #include "myAssert.h"
 
  #include <string.h>
- #include <assert.h>
 
  int flagSearch( int argc, char** argv, const char* flag) {
 
-    assert( flag != NULL );
-    assert ( argv != NULL );
+    myAssert( flag != NULL, 0 );
+    myAssert ( argv != NULL, 0 );
 
     for( int indexArgv = 0; indexArgv< argc; indexArgv++ ){
 
-        assert( argv[ indexArgv ] != NULL);
+        myAssert( argv[ indexArgv ] != NULL, 0);
 
         if ( strcmp( argv[ indexArgv ], flag) == 0 ) {
 

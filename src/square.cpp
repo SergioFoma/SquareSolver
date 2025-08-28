@@ -5,6 +5,7 @@
 #include "solver.h"
 #include "test.h"
 #include "flagSearch.h"
+#include "myAssert.h"
 
 void printResult( Coefficients coefficients, SolveResult answer );
 
@@ -98,7 +99,7 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 //-----------------------------------------------------------------------------------------------------
 int inputCoefficient( Coefficients* coefficients) {
 
-    assert( coefficients != NULL );
+    myAssert( coefficients != NULL, 0 );
 
     if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
         printf("\nОшибка. Введен неверный формат квадратного уравнения.");

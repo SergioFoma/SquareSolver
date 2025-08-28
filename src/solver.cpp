@@ -3,11 +3,8 @@
 #include <ctype.h>
 #include <math.h>
 #include <stdlib.h>
-#include <assert.h>
 
 void solveEquation( Coefficients coefficients, SolveResult* answer ) {
-
-    assert( answer != NULL );
 
     if ( fabs( coefficients.a ) <= delta ) {
         solveLinear( coefficients, answer );
@@ -19,12 +16,10 @@ void solveEquation( Coefficients coefficients, SolveResult* answer ) {
 
 void solveSquare( Coefficients coefficients, SolveResult* answer ) {
 
-    assert( answer != NULL );
-
     double D = coefficients.b * coefficients.b - 4 * coefficients.a * coefficients.c;
 
     if ( D < 0 ) {
-        ( answer-> countRoots ) = zeroRoot;
+        ( answer->countRoots ) = zeroRoot;
     }
     else {
         double firstPart = - coefficients.b / ( 2 * coefficients.a );
@@ -37,8 +32,6 @@ void solveSquare( Coefficients coefficients, SolveResult* answer ) {
 }
 
 void solveLinear( Coefficients coefficients, SolveResult* answer ) {
-
-    assert( answer != NULL );
 
     if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) <= delta ) {
         ( answer->countRoots ) = alotRoot;

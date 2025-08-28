@@ -1,8 +1,5 @@
 #undef myAssert // отмена объявления макроса.
-#undef myAssert_ // TODO not needed
-
-// TODO do not use _name
-// use name_ instead
+#undef myAssert_
 
 #ifdef NDEBUG // если не дебажная сборка
 #define myAssert( arguments, value ) ( (void)0 )
@@ -10,8 +7,8 @@
 void myAssert_( const char* func, const char* file, int line, const char *expr );
 
 #define myAssert( arguments, value )\
-    if ( !arguments ) {\
-        myAssert_(_func_, _FILE_, _LINE_, #arguments);\
+    if ( ! (arguments) ) {\
+        ( myAssert_(__func__, __FILE__, __LINE__, #arguments) );\
         return value;\
     }\
     else {\

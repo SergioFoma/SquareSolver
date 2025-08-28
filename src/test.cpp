@@ -1,10 +1,10 @@
 
 #include <TXLib.h>
 #include "test.h"
+#include "myAssert.h"
 
 #include <math.h>
 #include <stdio.h>
-#include <assert.h>
 #include <string.h>
 #include <stdlib.h>
 #include <malloc.h>
@@ -55,9 +55,7 @@ void testFromFunction() {
 
 RootsCount getRootsCountFromFile( const char* lineCountRoots ) {
 
-    assert( lineCountRoots != NULL );
-
-    //myAssert( lineCountRoots != NULL, zeroRoot );
+    myAssert( lineCountRoots != NULL, zeroRoot );
 
     if ( strcmp( lineCountRoots, "zeroRoot") == 0 ) {
         return zeroRoot;
@@ -80,9 +78,6 @@ RootsCount getRootsCountFromFile( const char* lineCountRoots ) {
 }
 
 void readNumbersFromFile( FILE* testFile, TestCaseData* testCase ) {
-
-    assert( testCase != NULL );
-    assert( testCase != NULL );
 
     double* numbers[] = { &( (testCase->coeff).a ), &( (testCase->coeff).b ) , &( (testCase->coeff).c ), 
                          &( (testCase->trueResult).x1 ) , &( (testCase->trueResult).x2 )  };
@@ -119,7 +114,7 @@ void clearBufferFunction( FILE* testFile ) {
 
 int testFromFile( char* testName ) {
 
-    assert( testName != NULL );
+    myAssert( testName != NULL, 0);
 
     FILE* testFile = NULL;
 
@@ -172,9 +167,7 @@ int testFromFile( char* testName ) {
     return 1;
 }
 
-void runTestFromArray(const TestCaseData* testData, const size_t testCount) { // TODO const size_t ----> const not needed
-
-    assert( testData != NULL );
+void runTestFromArray(const TestCaseData* testData, size_t testCount) {
 
     for (size_t testIndex = 0; testIndex < testCount ; testIndex++ ) {
 
