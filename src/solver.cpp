@@ -24,12 +24,9 @@ void solveSquare( Coefficients coefficients, SolveResult* answer ) {
     double D = coefficients.b * coefficients.b - 4 * coefficients.a * coefficients.c;
 
     if ( D < 0 ) {
-
         ( answer-> countRoots ) = zeroRoot;
     }
-
     else {
-
         double firstPart = - coefficients.b / ( 2 * coefficients.a );
         double secondPart = sqrt( D ) / ( 2 * coefficients.a );
 
@@ -44,17 +41,13 @@ void solveLinear( Coefficients coefficients, SolveResult* answer ) {
     assert( answer != NULL );
 
     if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) <= delta ) {
-
         ( answer->countRoots ) = alotRoot;
     }
     else if( fabs( coefficients.b ) <= delta && fabs( coefficients.c ) >= delta ){
-
         ( answer->countRoots) = zeroRoot;
     }
     else {
-
         answer->x1 = answer->x2 = -coefficients.c / coefficients.b;
         ( answer->countRoots ) = oneRoot;
     }
-
 }

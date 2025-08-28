@@ -57,6 +57,8 @@ RootsCount getRootsCountFromFile( const char* lineCountRoots ) {
 
     assert( lineCountRoots != NULL );
 
+    //myAssert( lineCountRoots != NULL, zeroRoot );
+
     if ( strcmp( lineCountRoots, "zeroRoot") == 0 ) {
         return zeroRoot;
     }
