@@ -21,12 +21,12 @@ int flagSearch( int argc, char** argv, const char* flag ) {
     return 0;
  }
 
-int  checkOnFlag( int argc, char** argv ) {
+bool checkOnFlag( int argc, char** argv ) {
 
     int indexOfFlag = 0;
     if ( ( indexOfFlag = flagSearch( argc, argv, "--Test" ) ) != 0 ) {
         testFromFunction();
-        return 1;
+        return true;
     }
     else if ( ( indexOfFlag = flagSearch( argc, argv, "--file-test" ) ) != 0 ) {
         if( argc > 2 ) {
@@ -35,7 +35,7 @@ int  checkOnFlag( int argc, char** argv ) {
         else {
             colorPrintf( UNDERLINED, RED, "Не указано имя тестирующего файла.");
         }
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
  }

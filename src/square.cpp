@@ -7,10 +7,11 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <stdbool.h>
 
 void printResult( Coefficients coefficients, SolveResult answer );
 
-int inputCoefficient( Coefficients* coefficients );
+bool inputCoefficient( Coefficients* coefficients );
 
 int main( int argc, char** argv ) {
 
@@ -81,24 +82,24 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 //!
 //! @param [in] *coefficients   *coefficients - указатель на структуру, получающую коэффициенты.
 //!
-//! @return 1 при успешном считывании, 0 при безуспешном.
+//! @return tru при успешном считывании, false при безуспешном.
 //!
 //! @note Считывает коэффициенты с ввода пользователя в coefficients.
 //!
 //-----------------------------------------------------------------------------------------------------
-int inputCoefficient( Coefficients* coefficients) {
+bool inputCoefficient( Coefficients* coefficients) {
 
     myAssert( coefficients != NULL, 0 )
 
     if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
         colorPrintf( UNDERLINED, RED, "\nОшибка. Введен неверный формат квадратного уравнения.");
-        return 0;
+        return false;
     }
 
     if ( isfinite( coefficients->a ) == 0 || isfinite( coefficients->b ) == 0 ||
          isfinite( coefficients->c ) == 0 ) {
-        return 0;
+        return false;
     }
 
-    return 1;
+    return true;
 }

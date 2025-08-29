@@ -11,21 +11,21 @@
 #include <stdlib.h>
 #include <malloc.h>
 
-int testSolve( TestCaseData caseData ) {
+bool testSolve( TestCaseData caseData ) {
 
     SolveResult actualResult = { NAN, NAN, zeroRoot };
     solveEquation( caseData.coeff, &actualResult);
 
     if ( isnan( caseData.trueResult.x1 ) && isnan( caseData.trueResult.x2) && isnan( actualResult.x1) &&
          isnan( actualResult.x2 ) ) {
-        return 1;
+        return true;
     }
     else if ( isEqual( caseData.trueResult.x1, actualResult.x1 ) &&
               isEqual( caseData.trueResult.x2, actualResult.x2) &&
               caseData.trueResult.countRoots == actualResult.countRoots ) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 void printFail( TestCaseData caseData ) {
@@ -119,7 +119,7 @@ void clearBufferFunction( FILE* testFile ) {
     while ( fgetc( testFile ) != '\n' && fgetc( testFile ) != EOF );
 }
 
-int testFromFile( char* testName ) {
+bool testFromFile( char* testName ) {
 
     myAssert( testName != NULL, 0)
 
@@ -129,7 +129,7 @@ int testFromFile( char* testName ) {
 
     if ( testFile == NULL ) {
         colorPrintf( UNDERLINED, RED, "Ошибка открытия файла.");
-        return 0;
+        return false;
     }
 
     size_t testCount = 0;
@@ -142,14 +142,14 @@ int testFromFile( char* testName ) {
 
     if ( testData == NULL ) {
         colorPrintf( UNDERLINED, RED, "Память переполнена.");
-        return 0;
+        return false;
     }
 
     char* lineCountRoots = ( char* )calloc( maxLineCountRoots , sizeof( char ) );
 
     if( lineCountRoots == NULL ) {
         colorPrintf( UNDERLINED, RED, "Память переполнена.");
-        return 0;
+        return false;
     }
 
     for ( size_t line = 0; line < testCount; line++ ) {
@@ -168,7 +168,7 @@ int testFromFile( char* testName ) {
     free( testData );
 
     fclose( testFile );
-    return 1;
+    return true;
 }
 
 void runTestFromArray(const TestCaseData* testData, size_t testCount) {

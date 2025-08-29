@@ -1,6 +1,8 @@
 #ifndef H_SOLVER
 #define H_SOLVER
 
+#include <stdbool.h>
+
 //-----------------------------------------------------------------------------------------------------
 //!
 //! @note Содержит коды для количества корней. Количество корней - код, соотвествующий этому количеству.
@@ -94,11 +96,11 @@ void solveLinear( Coefficients coefficients, SolveResult* answer);
 //! @param[in] firstNumber     firstNumber - первое число для сравнения.
 //! @param[in] secondNumber    secondNumber - второе число для сравнения.
 //!
-//! @return 1 если числа близки друг другу, 0 если отличны.
+//! @return tru если числа близки друг другу, false если отличны.
 //!
 //! @note Проверяет близость чисел.
 //!
 //------------------------------------------------------------------------    
-int isEqual( double firstNumber, double secondNumber );
+bool isEqual( double firstNumber, double secondNumber );
 
 #endif

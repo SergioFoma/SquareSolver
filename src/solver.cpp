@@ -5,7 +5,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-int isEqual( double firstNumber, double secondNumber ) {
+bool isEqual( double firstNumber, double secondNumber ) {
     return (  fabs( firstNumber - secondNumber ) <= delta ); 
 }
 
