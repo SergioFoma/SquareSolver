@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rootscount_0',['RootsCount',['../solver_8h.html#aa25c6d8cdf0bee88e27388ccef3dcdc3',1,'solver.h']]]
+  ['colors_0',['Colors',['../paint_8h.html#a55ecd4f2ec2ebfe8d5b0163e4ac2a967',1,'paint.h']]]
 ];

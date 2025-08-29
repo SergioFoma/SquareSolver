@@ -5,58 +5,67 @@
 #include <string.h>
 #include <malloc.h>
 
-const char* getColorLine( const char* color, const char* line, const char* cleanColor ) {
-    size_t lineSize = sizeof( color ) + sizeof( line ) + sizeof( cleanColor );
-
-    char* result = (char*)calloc( lineSize, sizeof( char ) );
-
-    if ( result == NULL ) {
-        colorPrintf("RED", "Ошибка. Память переполенена" );
-        return "0";
+const char* getColorString( Colors color ) {
+    switch (color) {
+        case PURPLE:
+            return colorInPurple;
+            break;
+        case YELLOW:
+            return colorInYellow;
+            break;
+        case GREEN:
+            return colorInGreen;
+            break;
+        case BLUE:
+            return colorInBlue;
+            break;
+        case RED:
+            return colorInRed;
+            break;
+        default:
+            return "";
+            break;
     }
-    char* addColor = strcpy( result, color );
-    char* addLine = strcat( addColor, line );
-
-    free( result );
-    
-    return (char*)strcat(addLine, cleanColor );
 }
 
-void colorPrintf( const char* color, const char* line ... ) {
+const char* getStyleString( Styles style ) {
+    switch( style ) {
+        case BOLD:
+            return makeBold;
+            break;
+        case FADED:
+            return makeFaded;
+            break;
+        case ITALICS:
+            return makeItalics;
+            break;
+        case UNDERLINED:
+            return makeUnderlined;
+            break;
+        case BLINKING:
+            return makeBlinking;
+            break;
+        case CROSSEDOUT:
+            return makeCrossedOut;
+            break;
+        case NOMODE:
+            return "\033[";
+            break;
+        default:
+            return "\033[";
+            break;
+    }
+}
+
+void colorPrintf( Styles style, Colors color,  const char* line ... ) {
 
     va_list args; // объявляем указатель
     va_start( args, line ); // связываем args с первым необязательным параметром. va_list как указатель
 
-    if ( strcmp( color, "GREEN" ) == 0 ) {
-        const char* colorLine = getColorLine( colorInGreen, line, colorReset );
-        if( strcmp(colorLine, "0") != 0 ) {
-            vprintf( colorLine , args );
-        }
-    }
-    else if ( strcmp(color, "RED" ) == 0 ) {
-        const char* colorLine = getColorLine( colorInRed, line, colorReset );
-        if ( strcmp( colorLine, "0" ) != 0 ) {
-            vprintf( colorLine, args );
-        }
-    }
-    else if( strcmp( color, "BLUE" ) == 0 ) {
-        const char* colorLine = getColorLine( colorInBlue, line, colorReset );
-        if ( strcmp(colorLine, "0") != 0 ) {
-            vprintf( colorLine, args );
-        }
-    }
-    else if( strcmp( color, "PURPLE" ) == 0) {
-        const char* colorLine = getColorLine( colorInPurple, line, colorReset );
-        if ( strcmp( colorLine, "0" ) != 0 ) {
-            vprintf( colorLine, args );
-        }
-    }
-    else if( strcmp( color, "YELLOW") == 0 ) {
-        const char* colorLine = getColorLine( colorInYellow, line, colorReset );
-        if ( strcmp(colorLine, "0" ) != 0 ) {
-            vprintf( colorLine, args );
-        }
-    }
+    printf("%s", getStyleString( style ) );
+    printf("%s", getColorString(color));
+    vprintf(line, args);
+    printf("%s", colorReset );
 
     va_end( args );
 }

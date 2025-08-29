@@ -82,9 +82,11 @@ $(function() {
 <div class="contents">
 <div class="textblock"><code>#include &lt;TXLib.h&gt;</code><br />
 <code>#include &quot;<a class="el" href="test_8h_source.html">test.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="my_assert_8h_source.html">myAssert.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="solver_8h_source.html">solver.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="paint_8h_source.html">paint.h</a>&quot;</code><br />
 <code>#include &lt;math.h&gt;</code><br />
 <code>#include &lt;stdio.h&gt;</code><br />
-<code>#include &lt;assert.h&gt;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
 <code>#include &lt;stdlib.h&gt;</code><br />
 <code>#include &lt;malloc.h&gt;</code><br />
@@ -98,7 +100,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a9cc3221b9b5d03dd5ef988a9e67f9135" id="r_a9cc3221b9b5d03dd5ef988a9e67f9135"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cc3221b9b5d03dd5ef988a9e67f9135">readNumbersFromFile</a> (FILE *testFile, <a class="el" href="struct_test_case_data.html">TestCaseData</a> *testCase)</td></tr>
 <tr class="memitem:a009360e0fec46f3f79ed6fbabac9a5bf" id="r_a009360e0fec46f3f79ed6fbabac9a5bf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a009360e0fec46f3f79ed6fbabac9a5bf">clearBufferFunction</a> (FILE *testFile)</td></tr>
 <tr class="memitem:ad50592a12a9f498524f30c048feb9600" id="r_ad50592a12a9f498524f30c048feb9600"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad50592a12a9f498524f30c048feb9600">testFromFile</a> (char *testName)</td></tr>
-<tr class="memitem:abb9a34e8a833ce26a1b9978271d8a9d0" id="r_abb9a34e8a833ce26a1b9978271d8a9d0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb9a34e8a833ce26a1b9978271d8a9d0">runTestFromArray</a> (const <a class="el" href="struct_test_case_data.html">TestCaseData</a> *testData, const size_t testCount)</td></tr>
+<tr class="memitem:a27c5a7b971c67fdbc96f5518b50b7be3" id="r_a27c5a7b971c67fdbc96f5518b50b7be3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a27c5a7b971c67fdbc96f5518b50b7be3">runTestFromArray</a> (const <a class="el" href="struct_test_case_data.html">TestCaseData</a> *testData, size_t testCount)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="a009360e0fec46f3f79ed6fbabac9a5bf" name="a009360e0fec46f3f79ed6fbabac9a5bf"></a>
@@ -202,8 +204,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="abb9a34e8a833ce26a1b9978271d8a9d0" name="abb9a34e8a833ce26a1b9978271d8a9d0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abb9a34e8a833ce26a1b9978271d8a9d0">&#9670;&#160;</a></span>runTestFromArray()</h2>
+<a id="a27c5a7b971c67fdbc96f5518b50b7be3" name="a27c5a7b971c67fdbc96f5518b50b7be3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27c5a7b971c67fdbc96f5518b50b7be3">&#9670;&#160;</a></span>runTestFromArray()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -251,6 +253,7 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd>0, если не удалось открыть файл или не хватает места для выделения динамической памяти</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Считывает строки из файла. Создает массив, состоящий из структур типа <a class="el" href="struct_test_case_data.html">TestCaseData</a>. Вызывает функцию test с параметром в виде этого массива. </dd></dl>
 
 </div>

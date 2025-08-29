@@ -1,4 +1,4 @@
-7
+20
 2 4 2 -1 -1 twoSameRoot
 1.2 -123.7 11.1 0.0898115 102.993522 twoRoot
 10 -50 60 2 3 twoRoot
@@ -6,3 +6,16 @@
 0 1 0 0 0 oneRoot
 0 0 1 NAN NAN zeroRoot
 1 2 1.000001 NAN NAN zeroRoot
+10 -50 60 2 3 twoRoot
+1 -2 -8 -2 4 twoRoot
+0 0 2.3 NAN NAN zeroRoot
+0 -3.4 0 0 0 oneRoot
+3 7 -6 -3 0.66667 twoRoot
+-1 7 8 -1 8 twoRoot
+4 4 1 -0.5 -0.5 twoSameRoot
+2 1 1 NAN NAN zeroRoot
+9 -6 1 0.33333 0.33333 twoSameRoot
+1 3 2 -2 -1 twoRoot
+2 -1 1 NAN NAN zeroRoot
+1 -4 -5 -1 5 twoRoot
+3 5 2 -1 -0.66667 twoRoot

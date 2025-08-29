@@ -1,6 +1,7 @@
  #include "flagSearch.h"
  #include "myAssert.h"
  #include "test.h"
+ #include "paint.h"
 
  #include <string.h>
 
@@ -35,7 +36,7 @@
                 testFromFile( argv[ indexFlag + 1 ] );
             }
             else {
-                printf( "RED", "Не введено имя тестирующего файла." );
+                colorPrintf( UNDERLINED, RED , "Не введено имя тестирующего файла." );
             }
             return 1;
         }

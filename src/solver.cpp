@@ -34,8 +34,14 @@ void solveSquare( Coefficients coefficients, SolveResult* answer ) {
         double firstPart = - coefficients.b / ( 2 * coefficients.a );
         double secondPart = sqrt( D ) / ( 2 * coefficients.a );
 
-        ( answer->x1) = firstPart - secondPart;
-        ( answer->x2) = firstPart + secondPart;
+        if ( secondPart < 0 ) {
+            ( answer->x1) = firstPart + secondPart;
+            ( answer->x2) = firstPart - secondPart;
+        }
+        else {
+            ( answer->x1) = firstPart - secondPart;
+            ( answer->x2) = firstPart + secondPart;
+        }
         ( answer->countRoots) = ( isEqual(answer->x1, answer->x2) ) ? twoSameRoot: twoRoot;
     }
 }

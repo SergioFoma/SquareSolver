@@ -81,14 +81,53 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &quot;<a class="el" href="flag_search_8h_source.html">flagSearch.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="my_assert_8h_source.html">myAssert.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="test_8h_source.html">test.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="paint_8h_source.html">paint.h</a>&quot;</code><br />
 <code>#include &lt;string.h&gt;</code><br />
-<code>#include &lt;assert.h&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ad54fd92d7a83f6211d5aa3b825ba33b4" id="r_ad54fd92d7a83f6211d5aa3b825ba33b4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad54fd92d7a83f6211d5aa3b825ba33b4">flagSearch</a> (int argc, char **argv, const char *flag)</td></tr>
+<tr class="memitem:a34be297fd242304e1b771e374f26c64c" id="r_a34be297fd242304e1b771e374f26c64c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a34be297fd242304e1b771e374f26c64c">checkOnFlag</a> (int argc, char **argv, const char *flag)</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a34be297fd242304e1b771e374f26c64c" name="a34be297fd242304e1b771e374f26c64c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34be297fd242304e1b771e374f26c64c">&#9670;&#160;</a></span>checkOnFlag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int checkOnFlag </td>
+          <td>(</td>
+          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>argc</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>flag</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">argc</td><td>argc - РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕС‡РµРє РІ РєРѕРЅСЃРѕР»Рё. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">**argv</td><td>**argv - СЃРїРёСЃРѕРє РёР· СѓРєР°Р·Р°С‚РµР»РµР№ РЅР° РІРІРµРґРµРЅРЅС‹Рµ СЃС‚СЂРѕРєРё. </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">flag</td><td>flag - СЃС‚СЂРѕРєР°, СЃРѕРґРµСЂР¶Р°С‰Р°СЏ РєРѕРјР°РЅРґСѓ РґР»СЏ РІРєР»СЋС‡РµРЅРёСЏ С‚РµСЃС‚РѕРІ.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>1 РµСЃР»Рё flag Р±С‹Р» РЅР°Р№РґРµРЅ РІ РєРѕРЅСЃРѕР»Рё, 0 РµСЃР»Рё flag РЅРµ Р±С‹Р» РЅР°Р№РґРµРЅ.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РЅР°Р№РґРµРЅРЅРѕРіРѕ flag, РІС‹Р·С‹РІР°РµС‚СЃСЏ СЃРѕРѕС‚РІРµСЃС‚РІСѓСЋС‰Р°СЏ С„СѓРЅРєС†РёСЏ. </dd></dl>
+
+</div>
+</div>
 <a id="ad54fd92d7a83f6211d5aa3b825ba33b4" name="ad54fd92d7a83f6211d5aa3b825ba33b4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad54fd92d7a83f6211d5aa3b825ba33b4">&#9670;&#160;</a></span>flagSearch()</h2>
 
@@ -112,7 +151,6 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<hr  />
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">argc</td><td>argc - РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚СЂРѕС‡РµРє РІ РєРѕРЅСЃРѕР»Рё. </td></tr>
@@ -121,10 +159,9 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>1 РµСЃР»Рё СЃС‚СЂРѕРєР° Р±С‹Р»Р° РЅР°Р№РґРµРЅР°, 0 РµСЃР»Рё СЃС‚СЂРѕРєР° Р±С‹Р»Р° РЅРµ РЅР°Р№РґРµРЅР°.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Р’ РІРІРµРґРµРЅРѕР№ СЃС‚СЂРѕРєРµ РёС‰РµС‚ СЃС‚СЂРѕРєСѓ РѕС‚Р»РёС‡РЅСѓСЋ РѕС‚ result.exe. Р’РѕР·СЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РїРѕРёСЃРєР°.</dd></dl>
-<hr  />
- 
+<dl class="section return"><dt>Returns</dt><dd>1 РµСЃР»Рё СЃС‚СЂРѕРєР° Р±С‹Р»Р° РЅР°Р№РґРµРЅР°, 0 РµСЃР»Рё СЃС‚СЂРѕРєР° РЅРµ Р±С‹Р»Р° РЅР°Р№РґРµРЅР°.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Р’ РІРІРµРґРµРЅРѕР№ СЃС‚СЂРѕРєРµ РёС‰РµС‚ СЃС‚СЂРѕРєСѓ РѕС‚Р»РёС‡РЅСѓСЋ РѕС‚ result.exe. Р’РѕР·СЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РїРѕРёСЃРєР°. </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->

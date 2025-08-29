@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ввод_20данных_0',['&lt;b&gt;Ввод данных&lt;/b&gt;',['../md__r_e_a_d_m_e.html#autotoc_md7',1,'']]],
-  ['весь_20проект_20нужно_3a_1',['&lt;b&gt;Чтобы скачать весь проект, нужно:&lt;/b&gt;',['../md__r_e_a_d_m_e.html#autotoc_md5',1,'']]]
+  ['x1_0',['x1',['../struct_solve_result.html#a51143892bae89b8146649f7ae321ec4e',1,'SolveResult']]],
+  ['x2_1',['x2',['../struct_solve_result.html#a8099d93dd4f018644a414f2757a87403',1,'SolveResult']]]
 ];

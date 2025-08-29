@@ -33,7 +33,7 @@ void printFail( TestCaseData caseData ) {
     SolveResult actualResult = { NAN, NAN, zeroRoot };
     solveEquation( caseData.coeff, &actualResult );
 
-    colorPrintf( "RED", "\n\nFALED: solveEquation( %lg %lg %lg ) -> x1 = %lg, x2 = %lg, countRoots = %d"
+    colorPrintf( UNDERLINED, RED, "\n\nFALED: solveEquation( %lg %lg %lg ) -> x1 = %lg, x2 = %lg, countRoots = %d"
            " should be( x1 = %lg, x2 = %lg, countRoots = %d)", caseData.coeff.a, caseData.coeff.b, caseData.coeff.c,
             actualResult.x1, actualResult.x2, actualResult.countRoots,
            caseData.trueResult.x1, caseData.trueResult.x2, caseData.trueResult.countRoots );
@@ -75,7 +75,7 @@ RootsCount getRootsCountFromFile( const char* lineCountRoots ) {
         return twoSameRoot;
     }
     
-    colorPrintf("RED", "Ошибка считывания количества корней уравнения.");
+    colorPrintf(UNDERLINED, RED, "Ошибка считывания количества корней уравнения.");
     return zeroRoot;
 }
 
@@ -128,7 +128,7 @@ int testFromFile( char* testName ) {
     testFile = fopen( testName, "r");
 
     if ( testFile == NULL ) {
-        colorPrintf( "RED", "Ошибка открытия файла.");
+        colorPrintf( UNDERLINED, RED, "Ошибка открытия файла.");
         return 0;
     }
 
@@ -141,14 +141,14 @@ int testFromFile( char* testName ) {
     TestCaseData* testData = ( TestCaseData* )calloc( testCount,  sizeof( TestCaseData ) );
 
     if ( testData == NULL ) {
-        colorPrintf( "RED", "Память переполнена.");
+        colorPrintf( UNDERLINED, RED, "Память переполнена.");
         return 0;
     }
 
     char* lineCountRoots = ( char* )calloc( maxLineCountRoots , sizeof( char ) );
 
     if( lineCountRoots == NULL ) {
-        colorPrintf( "RED", "Память переполнена.");
+        colorPrintf( UNDERLINED, RED, "Память переполнена.");
         return 0;
     }
 
@@ -181,7 +181,7 @@ void runTestFromArray(const TestCaseData* testData, size_t testCount) {
             printFail( testData[ testIndex] );
         }
         else {
-            colorPrintf( "GREEN", "Complited successfully with coefficients %lg %lg %lg\n",
+            colorPrintf( ITALICS, GREEN, "Complited successfully with coefficients %lg %lg %lg\n",
                     testData[ testIndex ].coeff.a, testData[ testIndex ].coeff.b, testData[ testIndex ].coeff.c );
         }
     }
