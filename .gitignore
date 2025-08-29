@@ -2,5 +2,5 @@
 *.obj
 *.save
 Docs/latex
-Build
-.vscode
+Build/
+.vscode/
