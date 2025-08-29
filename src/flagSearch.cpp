@@ -5,7 +5,7 @@
 
  #include <string.h>
 
- int flagSearch( int argc, char** argv, const char* flag) {
+int flagSearch( int argc, char** argv, const char* flag ) {
 
     myAssert( flag != NULL, 0 )
     myAssert ( argv != NULL, 0 )
@@ -21,27 +21,21 @@
     return 0;
  }
 
-  int checkOnFlag( int argc, char** argv, const char* flag ) {
-    
-    int indexFlag = 0;
+int  checkOnFlag( int argc, char** argv ) {
 
-    if ( ( indexFlag = flagSearch( argc, argv, flag ) ) != 0) {
-        
-        if ( strcmp( flag, "--Test" ) == 0 ) {
-            testFromFunction();
-            return 1;
-        }
-        else if ( strcmp( flag, "--file-test") == 0 ) {
-            if ( indexFlag < argc - 1) {
-                testFromFile( argv[ indexFlag + 1 ] );
-            }
-            else {
-                colorPrintf( UNDERLINED, RED , "Не введено имя тестирующего файла." );
-            }
-            return 1;
-        }
+    int indexOfFlag = 0;
+    if ( ( indexOfFlag = flagSearch( argc, argv, "--Test" ) ) != 0 ) {
+        testFromFunction();
+        return 1;
     }
-
+    else if ( ( indexOfFlag = flagSearch( argc, argv, "--file-test" ) ) != 0 ) {
+        if( argc > 2 ) {
+            testFromFile( argv[ indexOfFlag + 1] );
+        }
+        else {
+            colorPrintf( UNDERLINED, RED, "Не указано имя тестирующего файла.");
+        }
+        return 1;
+    }
     return 0;
  }
-

@@ -14,10 +14,7 @@ int inputCoefficient( Coefficients* coefficients );
 
 int main( int argc, char** argv ) {
 
-    if ( checkOnFlag( argc, argv, "--Test") ) {
-        return 0;
-    }
-    else if( checkOnFlag( argc, argv, "--file-test" ) ) {
+    if ( checkOnFlag( argc, argv ) ) {
         return 0;
     }
 
