@@ -1,16 +1,19 @@
 #include "solver.h"
 #include "myAssert.h"
-#include "mathComparison.h"
 
 #include <ctype.h>
 #include <math.h>
 #include <stdlib.h>
 
+int isEqual( double firstNumber, double secondNumber ) {
+    return (  fabs( firstNumber - secondNumber ) <= delta ); 
+}
+
 void solveEquation( Coefficients coefficients, SolveResult* answer ) {
 
     myAssert( answer != NULL, (void)0 )
 
-    if ( mathComparison( coefficients.a, 0.0 ) )  {
+    if ( isEqual( coefficients.a, 0.0 ) )  {
         solveLinear( coefficients, answer );
     }
     else {
@@ -33,7 +36,7 @@ void solveSquare( Coefficients coefficients, SolveResult* answer ) {
 
         ( answer->x1) = firstPart - secondPart;
         ( answer->x2) = firstPart + secondPart;
-        ( answer->countRoots) = ( mathComparison(answer->x1, answer->x2) ) ? twoSameRoot: twoRoot;
+        ( answer->countRoots) = ( isEqual(answer->x1, answer->x2) ) ? twoSameRoot: twoRoot;
     }
 }
 
@@ -41,10 +44,10 @@ void solveLinear( Coefficients coefficients, SolveResult* answer ) {
 
     myAssert( answer != NULL, (void)0 )
 
-    if( mathComparison( coefficients.b, 0 ) && mathComparison( coefficients.c, 0) ) {
+    if( isEqual( coefficients.b, 0 ) && isEqual( coefficients.c, 0) ) {
         ( answer->countRoots ) = alotRoot;
     }
-    else if( mathComparison( coefficients.b, 0 ) && !mathComparison( coefficients.c, 0 ) ){
+    else if( isEqual( coefficients.b, 0 ) && !isEqual( coefficients.c, 0 ) ){
         ( answer->countRoots) = zeroRoot;
     }
     else {
@@ -52,3 +55,4 @@ void solveLinear( Coefficients coefficients, SolveResult* answer ) {
         ( answer->countRoots ) = oneRoot;
     }
 }
+

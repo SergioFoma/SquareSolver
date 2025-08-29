@@ -2,7 +2,8 @@
 #include <TXLib.h>
 #include "test.h"
 #include "myAssert.h"
-#include "mathComparison.h"
+#include "solver.h"
+#include "paint.h"
 
 #include <math.h>
 #include <stdio.h>
@@ -19,8 +20,8 @@ int testSolve( TestCaseData caseData ) {
          isnan( actualResult.x2 ) ) {
         return 1;
     }
-    else if ( mathComparison( caseData.trueResult.x1, actualResult.x1 ) &&
-              mathComparison( caseData.trueResult.x2, actualResult.x2) &&
+    else if ( isEqual( caseData.trueResult.x1, actualResult.x1 ) &&
+              isEqual( caseData.trueResult.x2, actualResult.x2) &&
               caseData.trueResult.countRoots == actualResult.countRoots ) {
         return 1;
     }
@@ -32,8 +33,8 @@ void printFail( TestCaseData caseData ) {
     SolveResult actualResult = { NAN, NAN, zeroRoot };
     solveEquation( caseData.coeff, &actualResult );
 
-    printf("\n\n\033[31;40mFALED: solveEquation( %lg %lg %lg ) -> x1 = %lg, x2 = %lg, countRoots = %d"
-           " should be( x1 = %lg, x2 = %lg, countRoots = %d)\033[0m", caseData.coeff.a, caseData.coeff.b, caseData.coeff.c,
+    colorPrintf( "RED", "\n\nFALED: solveEquation( %lg %lg %lg ) -> x1 = %lg, x2 = %lg, countRoots = %d"
+           " should be( x1 = %lg, x2 = %lg, countRoots = %d)", caseData.coeff.a, caseData.coeff.b, caseData.coeff.c,
             actualResult.x1, actualResult.x2, actualResult.countRoots,
            caseData.trueResult.x1, caseData.trueResult.x2, caseData.trueResult.countRoots );
 
@@ -74,7 +75,7 @@ RootsCount getRootsCountFromFile( const char* lineCountRoots ) {
         return twoSameRoot;
     }
     
-    printf("\033[31;40mОшибка считывания количества корней уравнения\033[0m");
+    colorPrintf("RED", "Ошибка считывания количества корней уравнения.");
     return zeroRoot;
 }
 
@@ -127,7 +128,7 @@ int testFromFile( char* testName ) {
     testFile = fopen( testName, "r");
 
     if ( testFile == NULL ) {
-        printf("\033[31;40mОшибка открытия файла.\033[0m");
+        colorPrintf( "RED", "Ошибка открытия файла.");
         return 0;
     }
 
@@ -140,14 +141,14 @@ int testFromFile( char* testName ) {
     TestCaseData* testData = ( TestCaseData* )calloc( testCount,  sizeof( TestCaseData ) );
 
     if ( testData == NULL ) {
-        printf("\033[31;40mПамять переполнена\033[0m");
+        colorPrintf( "RED", "Память переполнена.");
         return 0;
     }
 
     char* lineCountRoots = ( char* )calloc( maxLineCountRoots , sizeof( char ) );
 
     if( lineCountRoots == NULL ) {
-        printf("\033[31;40mПамять переполнена\033[0m");
+        colorPrintf( "RED", "Память переполнена.");
         return 0;
     }
 
@@ -180,7 +181,7 @@ void runTestFromArray(const TestCaseData* testData, size_t testCount) {
             printFail( testData[ testIndex] );
         }
         else {
-            printf("\033[32;40mComplited successfully with coefficients %lg %lg %lg\n\033[0m",
+            colorPrintf( "GREEN", "Complited successfully with coefficients %lg %lg %lg\n",
                     testData[ testIndex ].coeff.a, testData[ testIndex ].coeff.b, testData[ testIndex ].coeff.c );
         }
     }

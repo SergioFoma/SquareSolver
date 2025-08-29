@@ -89,4 +89,16 @@ void solveSquare( Coefficients coefficients, SolveResult* answer);
 //------------------------------------------------------------------------------------------------------
 void solveLinear( Coefficients coefficients, SolveResult* answer);
 
+//-----------------------------------------------------------------------
+//!
+//! @param[in] firstNumber     firstNumber - первое число для сравнения.
+//! @param[in] secondNumber    secondNumber - второе число для сравнения.
+//!
+//! @return 1 если числа близки друг другу, 0 если отличны.
+//!
+//! @note Проверяет близость чисел.
+//!
+//------------------------------------------------------------------------    
+int isEqual( double firstNumber, double secondNumber );
+
 #endif

@@ -35,7 +35,7 @@
                 testFromFile( argv[ indexFlag + 1 ] );
             }
             else {
-                printf( "\033[31;40mНе введено имя тестирующего файла.\033[0m" );
+                printf( "RED", "Не введено имя тестирующего файла." );
             }
             return 1;
         }

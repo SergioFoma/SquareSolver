@@ -3,10 +3,10 @@
 #include "test.h"
 #include "flagSearch.h"
 #include "myAssert.h"
+#include "paint.h"
 
 #include <stdio.h>
 #include <math.h>
-
 
 void printResult( Coefficients coefficients, SolveResult answer );
 
@@ -21,9 +21,9 @@ int main( int argc, char** argv ) {
         return 0;
     }
 
-    printf("\033[35;40mМЯУ\n\n\033[0m"
-           "\033[33;40mВведите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
-           " на следующей строке через пробел:\n\n\033[0m");
+    colorPrintf( "PURPLE", "МЯУ\n\n");
+    colorPrintf( "YELLOW", "Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
+           " на следующей строке через пробел:\n\n");
 
     Coefficients coefficients = {0, 0, 0};
     SolveResult answer = { NAN, NAN, zeroRoot};
@@ -35,7 +35,7 @@ int main( int argc, char** argv ) {
     solveEquation( coefficients, &answer );
     printResult( coefficients, answer );
 
-    printf("\n\nCOMMIT GITHUB\n");
+    colorPrintf( "YELLOW", "\n\nCOMMIT GITHUB\n");
 
     return 0;
 }
@@ -50,32 +50,32 @@ int main( int argc, char** argv ) {
 //-----------------------------------------------------------------------------------------------------
 void printResult( Coefficients coefficients, SolveResult answer ) {
 
-    printf("\n\033[34;40ma: %lg b: %lg c: %lg\n\033[0m", coefficients.a, coefficients.b, coefficients.c );
+    colorPrintf( "BLUE", "\n\na: %lg b: %lg c: %lg\n", coefficients.a, coefficients.b, coefficients.c );
 
     switch ( answer.countRoots ) {
         case zeroRoot:
-            printf("\n\033[32;40mНет корней.\033[0m");
+            colorPrintf("RED", "Нет корней.");
             break;
 
         case twoRoot:
-            printf("\n\033[32;40mУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg\033[0m",
+            colorPrintf( "GREEN", "\nУравнение квадратное.\nМеньший корень: %lg\nБольший корень: %lg",
             answer.x1, answer.x2 );
             break;
 
         case oneRoot:
-            printf("\n\033[32;40mУравнение линейное.\nКорень уравнения: %lg\033[0m", answer.x1 );
+            colorPrintf( "GREEN", "\nУравнение линейное.\nКорень уравнения: %lg", answer.x1 );
             break;
 
         case alotRoot:
-            printf("\n\033[32;40mУравнение имеет бесконечное количество корней.\033[0m");
+            colorPrintf( "GREEN", "\nУравнение имеет бесконечное количество корней.");
             break;
 
         case twoSameRoot:
-            printf("\n\033[32;40mУравнение квадратное.\nИмеет единственный корень: %lg\033[0m", answer.x1 );
+            colorPrintf( "GREEN","\nУравнение квадратное.\nИмеет единственный корень: %lg", answer.x1 );
             break;
 
         default:
-            printf("\n\033[31;40mОшибка. Не определено количество корней.\033[0m");
+            colorPrintf( "RED", "\nОшибка. Не определено количество корней.");
             break;
     }
 }
@@ -94,7 +94,7 @@ int inputCoefficient( Coefficients* coefficients) {
     myAssert( coefficients != NULL, 0 )
 
     if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
-        printf("\n\033[31;40mОшибка. Введен неверный формат квадратного уравнения.\033[0m");
+        colorPrintf( "RED", "\nОшибка. Введен неверный формат квадратного уравнения.");
         return 0;
     }
 
