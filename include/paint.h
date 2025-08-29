@@ -85,4 +85,6 @@ const char* getColorString( Colors color );
 //!
 //-------------------------------------------------------------------------------------------------------
 const char* getStyleString( Styles style );
+
+int squareHelp();
 #endif

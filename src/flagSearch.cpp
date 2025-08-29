@@ -37,5 +37,11 @@ bool checkOnFlag( int argc, char** argv ) {
         }
         return true;
     }
+    else if ( ( indexOfFlag = flagSearch( argc, argv, "--help" ) ) == 2 &&
+                strcmp( argv[1] , "SquareSolver") == 0 ) {
+                    
+                    int res = squareHelp();
+                    return true;
+                }
     return false;
  }

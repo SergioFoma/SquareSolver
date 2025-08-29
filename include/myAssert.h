@@ -1,6 +1,6 @@
 
 #ifdef NDEBUG
-#define myAssert( arguments, value ) ( (void)0 )
+#define myAssert( arguments, value ) do {} while (false)
 #else
 //-------------------------------------------------------------------------------------------------------------
 //!

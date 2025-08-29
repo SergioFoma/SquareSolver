@@ -123,9 +123,7 @@ bool testFromFile( char* testName ) {
 
     myAssert( testName != NULL, 0)
 
-    FILE* testFile = NULL;
-
-    testFile = fopen( testName, "r");
+    FILE* testFile = fopen( testName, "r");
 
     if ( testFile == NULL ) {
         colorPrintf( UNDERLINED, RED, "Ошибка открытия файла.");

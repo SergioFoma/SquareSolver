@@ -21,7 +21,7 @@ int main( int argc, char** argv ) {
 
     colorPrintf( BLINKING, PURPLE, "МЯУ\n\n");
     colorPrintf( NOMODE, YELLOW, "Введите коэффициенты квадратного уравнения( a, b и c соответсвенно)"
-                 " на следующей строке через пробел:\n\n");
+                                 " на следующей строке через пробел:\n\n");
 
     Coefficients coefficients = {0, 0, 0};
     SolveResult answer = { NAN, NAN, zeroRoot};
@@ -89,7 +89,7 @@ void printResult( Coefficients coefficients, SolveResult answer ) {
 //-----------------------------------------------------------------------------------------------------
 bool inputCoefficient( Coefficients* coefficients) {
 
-    myAssert( coefficients != NULL, 0 )
+    myAssert( coefficients != NULL , 0 );
 
     if ( scanf("%lg %lg %lg", &( coefficients->a ), &( coefficients->b ), &( coefficients->c ) ) < 3 ) {
         colorPrintf( UNDERLINED, RED, "\nОшибка. Введен неверный формат квадратного уравнения.");
